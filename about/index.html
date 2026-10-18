@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About this record | Sameer Mittimani</title><meta name="description" content="What this record is, what was removed from it, and the licence.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="About this record | Sameer Mittimani"><meta property="og:description" content="What this record is, what was removed from it, and the licence."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="index.html" aria-current=page>About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="index.html" aria-current=page>About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="../index.html"><span aria-hidden="true">←</span> Overview</a><div class="project-meta"><span>about / privacy</span></div><h1>About this record</h1><p class="case-deck">What it is, what was removed, and the licence</p></section><div class="wrap doc-wrap"><article class="doc">
+<p><strong>Status:</strong> public. The notes, PRD, sprint plan, testing notes and launch plan are written. Open items are listed in <code>docs/process-and-learnings.md</code>.</p>
+<p><strong>Please read first:</strong> lender names, rates, limits and thresholds here are invented test values, not any lender's real policy. Car prices are demo listings. See <code>LICENSE</code> and <code>REDACTION.md</code>.</p>
+<p>A five-day fintech product management cohort (9 to 13 Oct 2026, Bengaluru) where I learned how lending companies and no-code lending platforms work, then planned, built, tested and fixed a product. This repo is the record: what I learned, what I built with it, what went wrong, and what I would do next.</p>
+<p><strong>The product:</strong> DealerFinance, a loan journey for new-car buyers at a dealership. It collects consent by OTP, verifies identity through DigiLocker, works out the price and loan, shows which lenders are likely to accept, sends the case to one lender, reroutes after a rejection, and settles the dealer's trade advance and commission. Kia cars, four lenders, built on FinStack's no-code journey builder. All lender terms and figures are test values.</p>
+<h2>People</h2>
+<ul>
+<li><strong>Sameer S Mittimani</strong> (cercit): product, PRD, sprint plan, no-code build, testing and write-ups.</li>
+<li><strong>Aditya Sharan</strong> (<a href="https://github.com/aaDhut">github.com/aaDhut</a>): teammate and colleague on Team 6.</li>
+</ul>
+<h2>Privacy</h2>
+<p>Mobile numbers, PAN, Aadhaar numbers, emails, logins and other people's names are not in this repo. <code>tools/scan_sensitive.py</code> checks for them before every commit. FinStack's own course material and platform access details are not included; the notes are in my own words.</p>
+<h2>What was removed from this repo, and how</h2>
+<p>This repo comes from real working files, chat messages, screenshots and a screen recording. Before anything went in, personal and platform-specific details were removed. This page says what and how, without repeating any of it.</p>
+<h2>Removed or masked</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Kind of detail</th>
+<th>What was done</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mobile numbers</td>
+<td>Not included. Screens show a masked form such as <code>94xxxxxx99</code></td>
+</tr>
+<tr>
+<td>PAN numbers</td>
+<td>Not included. Example PANs in the notes are made up</td>
+</tr>
+<tr>
+<td>Aadhaar numbers</td>
+<td>Not included. The Aadhaar steps happen on DigiLocker, and the demo clip stops before them</td>
+</tr>
+<tr>
+<td>Email addresses</td>
+<td>Not included</td>
+</tr>
+<tr>
+<td>Customer and classmate names</td>
+<td>Not included. Screens use initials such as &quot;S. S. M.&quot;; classmates and mentors are not named</td>
+</tr>
+<tr>
+<td>Platform logins, shared passwords and links to test journeys</td>
+<td>Not included</td>
+</tr>
+<tr>
+<td>Account-specific IDs in the FinStack variable paths</td>
+<td>Replaced by <code>&lt;id&gt;</code> in the formulas</td>
+</tr>
+<tr>
+<td>Vehicle registration records</td>
+<td>Only the field names and the three fields our rule uses are described. No owner details</td>
+</tr>
+<tr>
+<td>FinStack client figures, tech details and course material</td>
+<td>Not copied. The cohort notes are in my own words and leave out the client examples</td>
+</tr>
+<tr>
+<td>Other people's work</td>
+<td>Not included (the teammate's data folder and a public repo he started are left out)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Left out entirely</h2>
+<ul>
+<li>The WhatsApp group export, the participants' course sheet and their numbers.</li>
+<li>The screen recordings (see the note on the clip below).</li>
+<li>The FinStack brief and their pre-read recordings.</li>
+<li>Spreadsheets (all <code>.xlsx</code> files are blocked by <code>.gitignore</code>).</li>
+</ul>
+<h2>The demo clip</h2>
+<p>The full recording shows a real name, mobile number, PAN, a partly typed Aadhaar number, an Aadhaar OTP, the DigiLocker security PIN, a date of birth and a password-manager popup that listed an account number. The clip in <code>product/demo/</code> is about 2 minutes 25 seconds long, has no voice (only a calm background track made from code for this project, <code>tools/make_music.py</code>) and no zoom effects, and was made like this:</p>
+<ul>
+<li><strong>Shown on purpose:</strong> the author's own name (in the form fields and under each step title) and the OTP boxes and digits (the Step 1 code and the Aadhaar OTP). The author chose to show these.</li>
+<li><strong>Hidden behind a frosted, see-through cover (heavy blur plus a light veil, strong enough that the text cannot be read):</strong> the mobile number field on Step 1, the Aadhaar number boxes on DigiLocker, the partly shown registered mobile on the DigiLocker OTP page, the password-manager popup, the PAN field and the vehicle number field on Step 2. The covers are placed by finding each field's label on every frame, so they follow the field when the page moves.</li>
+<li><strong>Wiped out:</strong> the &quot;Code sent to <mobile>&quot; line under the Step 1 code boxes is painted over with the card's own background.</li>
+<li><strong>Cut:</strong> the DigiLocker result page with the date of birth and PAN, and the first seconds of the recording (the mobile number was typed into the name box by mistake before being deleted).</li>
+<li><strong>Edited for length:</strong> waiting and loading screens are fast-forwarded.</li>
+<li><strong>Rejected-lender route:</strong> the recording's own rejected test ended in an error pop-up. In the clip that moment is replaced by a short diagram of the designed route (rejected, back to Step 4, choose another financier, send again, approved), labelled as a diagram. The error itself is written up in <code>testing/failures-and-fixes.md</code>.</li>
+</ul>
+<p>A script scanned the finished clip for leftover mobile digits, &quot;code sent to&quot; text, PAN text, vehicle number text, a half-typed vehicle number, digits in the name box, Aadhaar digits, the registered mobile and the popup's account number, on every second frame, and found none (the highest score was below the match limit). The same kind of scan finds each of them in the unmasked source, so the check works. Frames spread across the clip were also checked by eye, and the author watched the final clip before it was added. Income, EMI, loan figures and the credit score on screen are test values and are left visible.</p>
+<h2>How it was checked</h2>
+<ol>
+<li><code>tools/scan_sensitive.py</code> looks for mobile numbers, PAN patterns, Aadhaar patterns, emails, passwords and keys, login links and a private list of names (the list is kept outside the repo). It was run before every commit.</li>
+<li>The full git history was searched for names, PAN fragments and numbers: none found.</li>
+<li>Links between files were checked.</li>
+</ol>
+<h2>Git history</h2>
+<p>Before this repository was made public, its history was rewritten: commit author details now use GitHub's no-reply address, and an early draft of one page that showed the first digits of an ID number was corrected in every commit. The history was then searched again for names, ID patterns and numbers, and none were found.</p>
+<h2>Licence</h2><pre><code>Copyright (c) 2026 Sameer S Mittimani and Aditya Sharan. All rights reserved.
+
+This repository is shared so that it can be read and reviewed. You may view it
+and quote short passages with credit. You may not copy, republish, sell or
+build on it without written permission from the authors.
+
+Parts of this work describe FinStack&#x27;s platform and a cohort run by FinStack.
+That material belongs to FinStack. The FinStack name and logo are FinStack&#x27;s own and are shown only to identify the cohort; no endorsement is implied. Lender names, rates, limits and thresholds
+in this repository are invented test values and are not any lender&#x27;s real
+terms. Car prices are listings used for a demonstration, not an offer.
+
+To use any part of this repository under an open licence, ask the authors.
+</code></pre></article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

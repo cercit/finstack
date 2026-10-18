@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BHIM vs PhonePe: the selection project | Sameer Mittimani</title><meta name="description" content="The product teardown and three-year roadmaps I submitted to FinStack before the cohort.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="BHIM vs PhonePe: the selection project | Sameer Mittimani"><meta property="og:description" content="The product teardown and three-year roadmaps I submitted to FinStack before the cohort."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="index.html" aria-current=page>Selection</a><a href="../learned/index.html">Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="index.html" aria-current=page>Selection</a><a href="../learned/index.html">Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="../index.html"><span aria-hidden="true">←</span> Overview</a><div class="project-meta"><span>selection / project</span></div><h1>BHIM vs PhonePe: the selection project</h1><p class="case-deck">The product teardown and three-year roadmaps I submitted to FinStack before the cohort.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>As part of FinStack's candidate evaluation, I submitted a product teardown of two payment apps with a three-year roadmap for each. The original PDF can be downloaded at the bottom of the page. I was selected for the cohort after it.</p>
+<p><strong>The idea in one paragraph.</strong> Both apps run on the same UPI rails, and paying a shop takes the same four steps on each: scan, amount, confirm, Face ID. Yet I use BHIM for most payments, and the reason is not features. BHIM leaves me alone; PhonePe keeps alerting me. PhonePe shows too much, BHIM shows too little, and each app's ownership explains why.</p>
+<h2>1. Regulation and licences decide what each can build</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>BHIM</th>
+<th>PhonePe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Owner</td>
+<td>NPCI BHIM Services Ltd (NBSL), a for-profit subsidiary of NPCI since Oct 2024. NPCI is a not-for-profit company owned by banks that runs the UPI rails</td>
+<td>PhonePe Ltd, an Indian public company (pre-IPO). Walmart holds 71.77%. Moved home from Singapore to India in 2022</td>
+</tr>
+<tr>
+<td>Licences</td>
+<td>None of its own beyond running the UPI app. Bill pay and UPI International sit in other NPCI companies; credit, loans, insurance and NPS come through partners</td>
+<td>Wallet, bill-pay unit, insurance broker and stockbroker licences, each in a separate company</td>
+</tr>
+<tr>
+<td>How it sells credit</td>
+<td>Partner lenders, shown below the fold</td>
+<td>Lending service provider for partner banks and NBFCs. No NBFC licence</td>
+</tr>
+<tr>
+<td>Main constraint</td>
+<td>Its parent runs the rails, so it must stay neutral</td>
+<td>A 30% UPI market cap from 31 Dec 2026; it was at 45.9% in Aug 2026</td>
+</tr>
+</tbody>
+</table></div>
+<p>PhonePe has applied for an NBFC licence three times (2021, 2023, January 2026), so it cannot lend from its own book and earns a commission as a middleman. It gave back its Account Aggregator licence in February 2025. Its other licences sit in separate companies, which is why tapping &quot;Stocks&quot; throws me out to another app. BHIM can make a profit, but its parent is the referee of the whole network, so BHIM sells quietly through partners and never pushes.</p>
+<h2>2. Product and experience</h2>
+<p>On PhonePe about 30% of the first screen was a credit card ad, a referral promo sat even inside money transfer, and strips sold EMIs and gold. On BHIM the top is a search bar, UPI Lite and balance, with Scan highlighted; loans, cards and investments are there but I had to scroll a long way to find them.</p>
+<p>PhonePe is built as a store that happens to take payments, for the mass market and 50 million merchants. BHIM is built as a utility for anyone who just wants to pay. PhonePe's biggest risk is not Google Pay, it is its own home screen. BHIM has the right products but hides them so well that almost nobody knows they exist.</p>
+<h2>3. Who pays for free payments</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Rs crore</th>
+<th>FY24</th>
+<th>FY25</th>
+<th>FY26</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PhonePe revenue</td>
+<td>5,064</td>
+<td>7,115 (+40%)</td>
+<td>7,920 (+11%)</td>
+</tr>
+<tr>
+<td>PhonePe net loss</td>
+<td>1,996</td>
+<td>1,727</td>
+<td>2,792</td>
+</tr>
+<tr>
+<td>PhonePe lending revenue</td>
+<td></td>
+<td>378</td>
+<td>945</td>
+</tr>
+<tr>
+<td>NPCI profit</td>
+<td>1,134</td>
+<td>about 1,450</td>
+<td>989</td>
+</tr>
+<tr>
+<td>BHIM (NBSL) loss</td>
+<td></td>
+<td>68</td>
+<td>391</td>
+</tr>
+</tbody>
+</table></div>
+<p>PhonePe keeps payments free because the daily habit is how it acquires customers; it earns later from loan, insurance and wealth commissions, merchant devices, ads and government UPI incentives. Lending is now the engine, up 2.5 times in a year. BHIM charges nothing because it is meant to be the neutral, ad-free option, and NPCI's surplus pays the bill. My rough estimate: PhonePe loses about Rs 0.21 per transaction and BHIM about Rs 2.4, so BHIM pays roughly ten times more per transaction to grow. From 15 October 2026 merchants pay 0.4% (capped at Rs 300) on UPI payments above Rs 2,000, the first real fee on UPI.</p>
+<h2>4. A three-year roadmap for each</h2>
+<p><strong>PhonePe: convert payers into paying customers.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>Year 1 (2027)</th>
+<th>Year 2 (2028)</th>
+<th>Year 3 (2029)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goal</td>
+<td>Get under the cap without losing the business</td>
+<td>Commissions become core</td>
+<td>Profitable enough to relist</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Engage NPCI with data, don't oppose it. Let go of small daily payers who never convert. Replace the crowded home screen with an AI search bar (&quot;pay electricity bill&quot; gives one option, not ten). Fewer alerts. Make the above-Rs 2,000 fee work for merchants</td>
+<td>A loan-fit engine that offers the right loan at the right price. A loan tracking system run as a service for lenders. Non-compete terms for big lenders</td>
+<td>Own underwriting model built on the repayment data, ready if the NBFC licence comes. Restart the IPO on commission-led profit</td>
+</tr>
+<tr>
+<td>Threat</td>
+<td>The cap; BHIM's assistant getting there first</td>
+<td>Lenders going around PhonePe to its customers; users feeling pushed into costly loans</td>
+<td>Regulator trust</td>
+</tr>
+</tbody>
+</table></div>
+<p>North star: paying customers as a share of active users. Guardrail: total commission revenue must keep growing, so the ratio can't rise just because users leave.</p>
+<p><strong>BHIM: run it like KSRTC.</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>Year 1 (2027)</th>
+<th>Year 2 (2028)</th>
+<th>Year 3 (2029)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Goal</td>
+<td>Become the quiet app people choose</td>
+<td>Win on need in rural India</td>
+<td>5% of UPI, top five</td>
+</tr>
+<tr>
+<td>Build</td>
+<td>Pitch working professionals who hate ads. Offer it to government staff, starting with the armed forces, not as a mandate. Move ad money from cricket news to Instagram, YouTube and Bigg Boss. Use the assistant to manage autopays from any app</td>
+<td>Ration shops, tea stalls, mandis. A safe place for farmers to park lump-sum crop money and withdraw any time, through bank tie-ups; Tatkal NPS. Products shown by need, not by banner</td>
+<td>First app to carry every new UPI feature. Bring the loss per transaction down each year. Pick up what PhonePe must give up under the cap</td>
+</tr>
+<tr>
+<td>Ignore</td>
+<td>Offer-chasing 18 to 27 year olds; leave them to PhonePe, Google Pay and Navi</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table></div>
+<p>North star: active users as a share of registered users. Guardrail: monthly active users and UPI share must grow in absolute terms. Biggest threat: spending Rs 391 crore a year to stay invisible.</p>
+<h2>Conclusion</h2>
+<p>Being government-owned doesn't make BHIM lose, just as it doesn't stop KSRTC from winning. Karnataka chooses KSRTC because it is run well, not because it is cheap. BHIM's problem is execution, not ownership. PhonePe's problem is the reverse: it does too much, too loudly, on a rail it will soon be allowed less of.</p>
+<h2>How I made it</h2>
+<p>I used Gemini, ChatGPT, Hermes and Claude to gather research, and Claude to cross-check figures, interview me on my views and help draft the text from my answers. Every figure was checked at its source. The app observations, opinions, roadmap choices and the analogy are my own. Sources: NPCI and NBSL filings and releases; PhonePe press releases and its draft prospectus (Jan 2026); TransUnion CIBIL; Inc42, Entrackr, Outlook Business, Business Standard, Medianama, SCC Online. App observations are my own, 26 Sep 2026.</p>
+<p><a href="bhim-vs-phonepe-teardown.pdf">Download the original PDF</a></p>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 2: underwriting, KYC, credit reports, proof of income, and the platform hands-on | Sameer Mittimani</title><meta name="description" content="Underwriting, KYC, credit reports, proof of income, and the platform hands-on.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Day 2: underwriting, KYC, credit reports, proof of income, and the platform hands-on | Sameer Mittimani"><meta property="og:description" content="Underwriting, KYC, credit reports, proof of income, and the platform hands-on."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Learned</a><div class="project-meta"><span>cohort / notes</span></div><h1>Day 2: underwriting, KYC, credit reports, proof of income, and the platform hands-on</h1><p class="case-deck">Underwriting, KYC, credit reports, proof of income, and the platform hands-on.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>Saturday 10 Oct 2026, about 3 hours 20 minutes. Two halves: underwriting and data sources, then a live hands-on build on the platform.</p>
+<p>Written in my own words from my notes of the recording. <strong>[verify]</strong> marks things said in class in a simplified or rough way.</p>
+<hr />
+<h2>1. Risk and reward</h2>
+<ul>
+<li>No lending segment is evergreen. Money moves between safe bonds, stocks and loans as yields change, and that movement opens new loan markets (gig workers are one: they have income that can be underwritten with alternate data).</li>
+<li>A small default rate can wipe out a lender's margin. With a 6% cost of money, 12% lending and about 3% running cost, a 3% default rate turns a profit into a small loss. That is why high-risk lenders charge very high rates, and why a first small loan matters: it gives a new-to-credit person a credit history.</li>
+<li>The cost of onboarding (KYC, bureau, cloud, API calls) is the same for a small or a large loan, so good products try to raise the ticket size.</li>
+</ul>
+<h2>2. Underwriting: four questions</h2>
+<ol>
+<li><strong>Contactability:</strong> can we reach the customer later?</li>
+<li><strong>Capability:</strong> can they afford it?</li>
+<li><strong>Collectability:</strong> can we recover the money if they do not pay? Remote areas cost more to collect from, so banks tag pin codes green, amber or red.</li>
+<li><strong>Intent:</strong> will they pay? There is no API for intent. It is checked late, by talking, because it is expensive.</li>
+</ol>
+<p><strong>Funnel thinking.</strong> Every step runs data fetches and rules and decides who goes on. Put cheap checks first and expensive ones later.</p>
+<h2>3. What makes a good fintech product</h2>
+<ul>
+<li><strong>Embed it so it does not feel like finance.</strong> A flight or hotel booking can run KYC and a credit check quietly and then offer EMI at checkout.</li>
+<li><strong>No-cost EMI</strong> is a discount from the seller paid to the financier, so the customer pays the full price in instalments. It serves people who could already afford the item.</li>
+<li>Everyone has the same tools (DigiLocker, the same bureaus), so the <strong>experience</strong> decides who wins.</li>
+</ul>
+<h2>4. KYC</h2>
+<ul>
+<li>Proof of identity and proof of address, from two documents. Most apps use PAN for identity and Aadhaar for address.</li>
+<li><strong>DigiLocker</strong> returns a signed document from the source, and anyone can use it, but the user is redirected to confirm with an OTP. That breaks the flow, so a reminder notification helps.</li>
+<li><strong>Names rarely match exactly</strong> (initials, father's name), so use a <strong>fuzzy match</strong>, not an exact one.</li>
+<li>Push any missing-data asks to the end so people do not drop off.</li>
+<li>A selfie or blink test lowers risk but is not real biometrics. For RBI, the proof is the call to the identity authority plus the consent taken before it.</li>
+</ul>
+<h2>5. Credit reports (CCR)</h2>
+<ul>
+<li>Under 30% of Indians have credit data <strong>[verify: rough figure]</strong>. A no-hit comes back as -1, new to credit. That is a challenge and also the opportunity.</li>
+<li>Four bureaus: CIBIL, Experian, Equifax, CRIF. Use the score only as a rough gate. A score of 750 can still be a fraud.</li>
+<li>A report gives the score, the enquiries (many means a desperate borrower), loan performance with days past due, and past addresses.</li>
+<li><strong>Soft pull vs hard pull.</strong> A soft pull leaves no enquiry on the customer's report. A hard pull records an enquiry against the lender.</li>
+<li><strong>Privacy:</strong> a full name plus a mobile number can be enough to pull someone's PAN, address and date of birth.</li>
+</ul>
+<h2>6. Proof of income</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Route</th>
+<th>Who can use it</th>
+<th>Problem</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Account Aggregator</td>
+<td>Only regulated lenders or their partners</td>
+<td>Many smaller banks are not on it</td>
+</tr>
+<tr>
+<td>Bank statement upload and analysis</td>
+<td>Anyone</td>
+<td>Friction; tampering risk</td>
+</tr>
+<tr>
+<td>Tax returns, EPFO, GST</td>
+<td>Anyone</td>
+<td>Credentials sit with an accountant, or servers are unreliable</td>
+</tr>
+</tbody>
+</table></div>
+<ul>
+<li>Salary should arrive by NEFT or IMPS, not UPI. EMIs should stay under about half of income.</li>
+<li>For the hackathon: use statement analysis, not Account Aggregator.</li>
+</ul>
+<h2>7. Platform hands-on</h2>
+<ul>
+<li><strong>Forms:</strong> field types, regex checks (a 10-digit mobile; PAN where the fourth letter is P for an individual), test each form once so the system learns its output.</li>
+<li><strong>Journey:</strong> steps and actions; what happens on failure; a unique identifier on step 1 (the mobile) to stop duplicates.</li>
+<li><strong>Auto-submit:</strong> calling an API in the background when a form is submitted. In the demo, name and mobile alone fetched PAN, addresses and date of birth from a basic bureau call, and a second call pulled the full soft-pull report.</li>
+<li><strong>Pre-fill with a fallback:</strong> use the bureau name first, else what was typed. Lock the pre-filled field.</li>
+<li><strong>&quot;Force error&quot;:</strong> on means an API failure stops the user; off means they carry on (for nice-to-have fills).</li>
+<li><strong>Consent timestamp:</strong> every bureau call needs it, captured at submit. The platform also stores device and location as an audit trail.</li>
+<li><strong>Changes on a live journey</strong> do not reach leads already past that step; real teams copy the journey and roll out to a small share first.</li>
+<li><strong>Back office:</strong> the listing page shows chosen columns, filters and charts; staff can open a stuck lead and fill steps for the customer (assisted onboarding).</li>
+<li>Two people can edit the same journey but may overwrite each other: one on forms, one on the journey.</li>
+</ul>
+<h2>8. How the hackathon was judged, as announced</h2>
+<ol>
+<li>A &quot;subtle&quot; product, where the finance is embedded and the user barely notices, scored highest.</li>
+<li>Completeness and a clearly targeted customer, with rules that filter to that customer.</li>
+<li>Screens and charts counted least.</li>
+</ol>
+<ul>
+<li>KYC and a credit report had to be in the journey. No own APIs. No servicing.</li>
+</ul>
+<h2>What I took away</h2>
+<ol>
+<li>The best rule order is cheap to costly. Every API call is money, so each step has to earn its place.</li>
+<li>&quot;No data&quot; is a normal answer, not an error. New-to-credit customers are the market, not an exception.</li>
+<li>Soft pull for a quiet check; consent first, with a timestamp.</li>
+<li>A fuzzy name match beats an exact one in India.</li>
+</ol>
+<h2>Where I used it in DealerFinance</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>From class</th>
+<th>In the product</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Consent with a timestamp before a bureau call</td>
+<td>Step 1: terms tick, then a code to the customer's phone</td>
+</tr>
+<tr>
+<td>Name and mobile can fetch PAN details</td>
+<td>Decided early; pre-fill from DigiLocker was built</td>
+</tr>
+<tr>
+<td>DigiLocker for identity and address</td>
+<td>DigiLocker stage between Step 1 and Step 2</td>
+</tr>
+<tr>
+<td>Fuzzy name match</td>
+<td>A name-match expression comparing typed and PAN names</td>
+</tr>
+<tr>
+<td>Soft pull, score as a gate</td>
+<td>Credit score and credit health on Step 4</td>
+</tr>
+<tr>
+<td>Pin code bands</td>
+<td>Considered as an extra lender rule; not built</td>
+</tr>
+<tr>
+<td>Assisted onboarding</td>
+<td>The executive fills the journey for the customer</td>
+</tr>
+<tr>
+<td>Funnel order, cheap first</td>
+<td>Skip the vehicle-number check when there is no exchange car</td>
+</tr>
+<tr>
+<td>&quot;No data is an answer&quot;</td>
+<td>NTC path added after the live demo</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Open or to verify</h2>
+<ul>
+<li>Whether the bureau coverage figure and the reporting rules to all four bureaus are current <strong>[verify]</strong>.</li>
+<li>Whether RBI wants a hard pull after a loan is given, as said in class <strong>[verify]</strong>.</li>
+</ul>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

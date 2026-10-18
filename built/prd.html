@@ -1,0 +1,708 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DealerFinance: product requirements document | Sameer Mittimani</title><meta name="description" content="Problem, users, scope, rules and risks, in the format taught in class.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="DealerFinance: product requirements document | Sameer Mittimani"><meta property="og:description" content="Problem, users, scope, rules and risks, in the format taught in class."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="index.html" aria-current=page>Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="index.html" aria-current=page>Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Built</a><div class="project-meta"><span>product / documents</span></div><h1>DealerFinance: product requirements document</h1><p class="case-deck">Problem, users, scope, rules and risks, in the format taught in class.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p><strong>Status:</strong> draft for review, written 18 Oct 2026 from the work done in the FinStack cohort (9 to 13 Oct 2026).
+<strong>Team 6:</strong> Sameer S Mittimani and Aditya Sharan.
+<strong>Format:</strong> the PRD template from Class 9, trimmed to the sections that apply.</p>
+<p><strong>How to read the tags.</strong> Class 9 taught that a PRD must separate what is known from what is guessed, so statements carry a small tag: <strong>Built</strong> means it works in the journey today; <strong>Planned</strong> means designed but not built; <strong>Assumption</strong> means our guess, not tested; <strong>Test value</strong> means a demo number, not a real lender term. No research is claimed beyond what the team saw and did.</p>
+<p>The <a href="decisions-log.html">decisions log</a> lists the design decisions F1 to F26 and what happened to each. It was written for a bigger design. This PRD describes what was built and what comes next.</p>
+<hr />
+<h2>1. Overview</h2>
+<p>DealerFinance is a loan journey for a new-car buyer, run by a dealership sales executive or by the customer. It collects consent, verifies identity, works out the price and loan amount, checks which lenders are likely to accept the case, sends it to one lender, follows the lender's answer and settles the dealer's trade advance and commission. It is built on FinStack's no-code journey builder. Scope for the hackathon: Kia cars in Bengaluru, four lenders (sbi, hdfc, bajaj, chola).</p>
+<h2>2. Background</h2>
+<ul>
+<li>A dealership sells the car and also arranges the loan. The executive talks to several lenders by phone or app, one after another. [Assumption, from the team's finance experience]</li>
+<li>The dealer is paid a commission by the lender and often holds a trade advance (stock funding) with some lenders. Those limits and commissions are tracked outside the sales process, in accounts. <span class="tag tag-assumption">Assumption</span></li>
+<li>A rejected loan costs the dealer a sale unless the case is quickly moved to another lender. <span class="tag tag-assumption">Assumption</span></li>
+<li>Why now: FinStack gives credit report, KYC, DigiLocker, vehicle and bank-statement APIs behind a no-code builder, so a dealer-side tool can be built without a lending system of our own. [Built, cohort learning]</li>
+</ul>
+<h2>3. Problem</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Part</th>
+<th>Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>User</td>
+<td>The dealership executive, and the buyer sitting in front of them</td>
+</tr>
+<tr>
+<td>Task</td>
+<td>Find a lender who will fund this customer and this car, and close the sale</td>
+</tr>
+<tr>
+<td>Cause</td>
+<td>Lender fit is checked by calling around; price, tax, insurance and exchange value are worked out by hand; the customer's data is typed again for each lender</td>
+</tr>
+<tr>
+<td>Consequence</td>
+<td>Slow answers, wrong loan amounts, repeat typing, cases dropped after a rejection</td>
+</tr>
+<tr>
+<td>Business effect</td>
+<td>Lost car sales, and commission and trade advance that are not tracked case by case</td>
+</tr>
+</tbody>
+</table></div>
+<h2>4. Users</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>User</th>
+<th>Role</th>
+<th>Job to be done</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sales or finance executive (primary)</td>
+<td>Fills the journey for the customer</td>
+<td>&quot;When a buyer says they want finance, I want a lender and an exact cash figure in minutes, so the sale does not stall.&quot;</td>
+</tr>
+<tr>
+<td>Customer (secondary)</td>
+<td>Gives consent, completes KYC</td>
+<td>&quot;I want to know what I need to pay, without sharing my documents with five people.&quot;</td>
+</tr>
+<tr>
+<td>Dealer principal (buyer of the tool)</td>
+<td>Pays for it</td>
+<td>&quot;I want to see which lenders approve, how fast, and what commission and trade advance I have left.&quot; <span class="tag tag-planned">Planned</span></td>
+</tr>
+<tr>
+<td>Lender (outside the journey)</td>
+<td>Receives the case, answers approved or rejected</td>
+<td>Not a user of this product yet. <span class="tag tag-planned">Planned</span></td>
+</tr>
+</tbody>
+</table></div>
+<p>Evidence: the personas come from the team's own working knowledge, not from interviews. Interviews with dealers are an open item (section 21).</p>
+<h2>5. Goals and non-goals</h2>
+<p><strong>Goals</strong></p>
+<ol>
+<li>A customer or executive can finish the journey with minimal typing. Most fields pre-fill from APIs, rules or the dealer's quote. [Built, partly]</li>
+<li>The executive sees which lenders are open for this case, and can reroute after a rejection. <span class="tag tag-built">Built</span></li>
+<li>The exact cash the customer needs (down payment plus any gap to the approved amount) is shown before the sale is closed. <span class="tag tag-built">Built</span></li>
+<li>The dealer's trade advance balance and commission are shown per case. [Built with demo values]</li>
+</ol>
+<p><strong>Non-goals (deliberately out for now)</strong></p>
+<ul>
+<li>No credit decision, sanction promise or approved amount from DealerFinance itself. The lender decides.</li>
+<li>No loan servicing or collections.</li>
+<li>No database or lending system of our own. FinStack's journey, listing and back office are used as they are.</li>
+<li>No brands other than Kia in the demo.</li>
+<li>No dealer login or separate dealer portal. One journey serves the customer and the executive.</li>
+</ul>
+<h2>6. Principles</h2>
+<ul>
+<li>Consent first: no credit report is pulled before the customer agrees and confirms by OTP on their own phone.</li>
+<li>Ask for less: every field that can be filled from an API, a rule or the dealer's quote should be.</li>
+<li>A &quot;not available&quot; answer is a valid answer: every outside call has a path that shows a plain label and moves on (lesson from the live demo).</li>
+<li>Show the dealer's money next to the customer's: commission and trade advance are visible, but never change the customer's choice silently.</li>
+</ul>
+<h2>7. Journey: before and after</h2>
+<p><strong>Before:</strong> enquiry in a CRM or notebook &gt; call lenders &gt; collect documents &gt; wait &gt; repeat if rejected.</p>
+<p><strong>After (as built):</strong> Enquiry with OTP &gt; DigiLocker &gt; Verification &gt; Customer_Inputs &gt; Routing-1 &gt; Routing-2 &gt; Settlement. A rejected case goes from Routing-2 back to Routing-1. <span class="tag tag-built">Built</span></p>
+<h2>8. Proposed solution: the six steps</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Step</th>
+<th>What happens</th>
+<th>Typed or filled</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1 Enquiry</td>
+<td>Customer name, mobile, terms tick, then a 6-digit code to the customer's phone</td>
+<td>Typed</td>
+</tr>
+<tr>
+<td>DigiLocker</td>
+<td>Aadhaar OTP through DigiLocker; PAN name, number and date of birth come back</td>
+<td>Filled</td>
+</tr>
+<tr>
+<td>2 Verification</td>
+<td>PAN (pre-filled), employment, monthly income, monthly EMI commitment, down payment, income proof yes or no, Kia model, exchange yes or no, vehicle number only if exchange is yes</td>
+<td>Mostly typed</td>
+</tr>
+<tr>
+<td>3 Customer_Inputs</td>
+<td>Ex-showroom price, road tax, insurance, TCS, on-road price, loan value, exchange value</td>
+<td>All pre-filled</td>
+</tr>
+<tr>
+<td>4 Routing-1</td>
+<td>Loan requirement, credit score (or NTC), LTV, choice of lender</td>
+<td>Filled, one pick</td>
+</tr>
+<tr>
+<td>5 Routing-2</td>
+<td>What the lender sees; status approved or rejected; approved amount when approved</td>
+<td>Status picked by hand today</td>
+</tr>
+<tr>
+<td>6 Settlement</td>
+<td>Additional down payment, trade advance limit and used, balance, commission</td>
+<td>All pre-filled</td>
+</tr>
+</tbody>
+</table></div>
+<h2>9. Functional requirements</h2>
+<p>Priority: <strong>P1</strong> must work for the journey to complete; <strong>P2</strong> needed for launch; <strong>P3</strong> later.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Behaviour</th>
+<th>Priority</th>
+<th>Why</th>
+<th>Acceptance</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FR-01</td>
+<td>Collect name, mobile, terms tick; send a 6-digit code to the customer's phone; continue only on a correct code</td>
+<td>P1</td>
+<td>Consent before any check</td>
+<td>Wrong code blocks; correct code opens DigiLocker</td>
+<td><span class="tag tag-built">Built</span></td>
+</tr>
+<tr>
+<td>FR-02</td>
+<td>Validate mobile as 10 digits starting 6 to 9</td>
+<td>P1</td>
+<td>Stop bad data early</td>
+<td><code>^[6-9]\d{9}$</code></td>
+<td><span class="tag tag-built">Built</span></td>
+</tr>
+<tr>
+<td>FR-03</td>
+<td>DigiLocker redirect and return; store PAN name, PAN number, date of birth</td>
+<td>P1</td>
+<td>KYC and pre-fill</td>
+<td>Return lands on Step 2 with PAN filled</td>
+<td><span class="tag tag-built">Built</span></td>
+</tr>
+<tr>
+<td>FR-04</td>
+<td>Compare typed name with the PAN name; compare typed PAN with the PAN from DigiLocker</td>
+<td>P2</td>
+<td>Catch wrong identity</td>
+<td>Name match score and PAN 100 or 0 shown; mismatch rule: name below 90% and PAN below 100%</td>
+<td>[Built as expressions; not tied to a screen]</td>
+</tr>
+<tr>
+<td>FR-05</td>
+<td>Work out age from date of birth</td>
+<td>P2</td>
+<td>Age rule for lenders</td>
+<td>Whole years, birthday-aware</td>
+<td>[Built as expression]</td>
+</tr>
+<tr>
+<td>FR-06</td>
+<td>Price, road tax, insurance, TCS and on-road price for the chosen Kia variant</td>
+<td>P1</td>
+<td>Loan base</td>
+<td>See section 11</td>
+<td><span class="tag tag-built">Built</span></td>
+</tr>
+<tr>
+<td>FR-07</td>
+<td>Loan value = on-road price less TCS, down payment and exchange value</td>
+<td>P1</td>
+<td>Loan amount</td>
+<td>Matches section 11</td>
+<td>[Built; a defect found, see section 13]</td>
+</tr>
+<tr>
+<td>FR-08</td>
+<td>Exchange value from vehicle number: brand, engine size and age</td>
+<td>P2</td>
+<td>Fill the exchange field</td>
+<td>Rule in section 11</td>
+<td>[Rule built; asset API pending]</td>
+</tr>
+<tr>
+<td>FR-09</td>
+<td>Credit score from the bureau; show &quot;NTC&quot; when no score returns</td>
+<td>P1</td>
+<td>Lender fit</td>
+<td>NTC case carries on to NTC-accepting lenders only</td>
+<td>[Score built; NTC path built after the demo]</td>
+</tr>
+<tr>
+<td>FR-10</td>
+<td>Credit health Bad, Good or Best from suit-filed balance, defaults and total outstanding</td>
+<td>P2</td>
+<td>Lender fit</td>
+<td>Section 11</td>
+<td>[Built as expression; hidden on screen]</td>
+</tr>
+<tr>
+<td>FR-11</td>
+<td>Fit label per lender: likely, possible, not a fit</td>
+<td>P1</td>
+<td>Pick a lender</td>
+<td>Section 11</td>
+<td>[Built as one formula]</td>
+</tr>
+<tr>
+<td>FR-12</td>
+<td>Send to one lender; record status approved or rejected</td>
+<td>P1</td>
+<td>Core flow</td>
+<td>Rejected returns to Routing-1</td>
+<td>[Built; status by hand]</td>
+</tr>
+<tr>
+<td>FR-13</td>
+<td>Approved amount replaces the requested loan when above 1</td>
+<td>P1</td>
+<td>Right settlement</td>
+<td>Section 11</td>
+<td><span class="tag tag-built">Built</span></td>
+</tr>
+<tr>
+<td>FR-14</td>
+<td>Additional down payment = loan requirement less approved amount</td>
+<td>P1</td>
+<td>Exact cash needed</td>
+<td>Never below 0</td>
+<td><span class="tag tag-built">Built</span></td>
+</tr>
+<tr>
+<td>FR-15</td>
+<td>Trade advance limit, used, balance and commission per lender</td>
+<td>P2</td>
+<td>Dealer value</td>
+<td>Section 11</td>
+<td>[Built, test values]</td>
+</tr>
+<tr>
+<td>FR-16</td>
+<td>Skip the vehicle-number check when exchange is No</td>
+<td>P1</td>
+<td>Avoid a dead end and a paid call</td>
+<td>Journey moves on with no exchange car</td>
+<td>[Built after the demo]</td>
+</tr>
+<tr>
+<td>FR-17</td>
+<td>&quot;My cases&quot; list and back-office review queue</td>
+<td>P2</td>
+<td>Resume and oversee cases</td>
+<td>Case list by status</td>
+<td>[Planned, FinStack listing page]</td>
+</tr>
+<tr>
+<td>FR-18</td>
+<td>Lender status and trade advance used from the lender</td>
+<td>P3</td>
+<td>Real decisions and balances</td>
+<td>API or callback</td>
+<td><span class="tag tag-planned">Planned</span></td>
+</tr>
+<tr>
+<td>FR-19</td>
+<td>Bank statement analysis for lenders that need income proof</td>
+<td>P3</td>
+<td>Verified income</td>
+<td>Salary credits and average balance</td>
+<td><span class="tag tag-planned">Planned</span></td>
+</tr>
+</tbody>
+</table></div>
+<h2>10. Detailed flows</h2>
+<p><strong>Happy path:</strong> Step 1 consent &gt; DigiLocker &gt; Step 2 &gt; Step 3 (all filled) &gt; Step 4 choose a fitting lender &gt; Step 5 lender says approved with an amount &gt; Step 6 settlement.</p>
+<p><strong>Rejected:</strong> Step 5 status rejected &gt; back to Step 4 &gt; pick another lender &gt; repeat. The rejected lender should not be offered again. [Planned: today it still is]</p>
+<p><strong>No score (NTC):</strong> Step 4 shows NTC &gt; only lenders that accept NTC are offered. [Built after the demo; the NTC lender list is still to confirm with each lender]</p>
+<p><strong>No exchange car:</strong> Step 2 exchange No &gt; no vehicle number asked &gt; Step 3 exchange value 0. [Built after the demo]</p>
+<p><strong>Approved for less than asked:</strong> Step 6 shows the gap as additional down payment. Example from the demo: asked 15,17,728, approved 15,00,000, additional down payment 17,728. <span class="tag tag-built">Built</span></p>
+<h2>11. Business rules (all amounts in rupees; lender terms are test values)</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Statement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insurance</td>
+<td>4% of the ex-showroom price (approximate)</td>
+</tr>
+<tr>
+<td>TCS</td>
+<td>1% of the ex-showroom price when it is above 10,00,000; otherwise 0</td>
+</tr>
+<tr>
+<td>Road tax</td>
+<td>Karnataka slabs plus a fixed 3,000 for other charges; looked up per Kia variant (182 variants)</td>
+</tr>
+<tr>
+<td>On-road price</td>
+<td>Ex-showroom + insurance + road tax. TCS is not included</td>
+</tr>
+<tr>
+<td>Loan value</td>
+<td>On-road price − TCS − down payment − exchange value, never below 0</td>
+</tr>
+<tr>
+<td>LTV</td>
+<td>Loan value ÷ ex-showroom price, as a percentage</td>
+</tr>
+<tr>
+<td>Credit health</td>
+<td>Bad if any suit-filed balance, any default account, or outstanding above 25,00,000. Best if outstanding is 10,00,000 or less. Otherwise Good</td>
+</tr>
+<tr>
+<td>Finance amount</td>
+<td>Approved amount if above 1, otherwise the loan requirement</td>
+</tr>
+<tr>
+<td>Additional down payment</td>
+<td>Loan requirement − approved amount</td>
+</tr>
+<tr>
+<td>Balance trade advance</td>
+<td>Lender limit − used so far − this case's finance amount</td>
+</tr>
+<tr>
+<td>Commission</td>
+<td>Lender rate × finance amount: sbi 1.4%, hdfc 1.8%, bajaj 2.5%, chola 3% <span class="tag tag-test">Test value</span></td>
+</tr>
+<tr>
+<td>Trade advance limits</td>
+<td>sbi 2 Cr, hdfc 1 Cr, bajaj 75 L, chola 50 L <span class="tag tag-test">Test value</span></td>
+</tr>
+<tr>
+<td>Exchange value</td>
+<td>Base price by engine-size band × make weight × age factor, rounded to 500. Make weights: Toyota 1.08, Maruti 1.05, Hyundai, Kia and Mahindra 1.00, Tata 0.93, other 0.85. Age factor falls from 0.90 in year 0 to 0.20 from year 10. [Assumption, not a dealer quote]</td>
+</tr>
+<tr>
+<td>Route</td>
+<td>Status rejected goes back to Routing-1; approved goes to Settlement</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Lender fit (illustrative thresholds, not the lenders' real policies) <span class="tag tag-assumption">Assumption</span></strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th></th>
+<th>sbi</th>
+<th>hdfc</th>
+<th>bajaj</th>
+<th>chola</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Not a fit if score is below</td>
+<td>750</td>
+<td>700</td>
+<td>650</td>
+<td>650</td>
+</tr>
+<tr>
+<td>Likely needs a score of at least</td>
+<td>770</td>
+<td>720</td>
+<td>670</td>
+<td>670</td>
+</tr>
+<tr>
+<td>Not a fit if monthly commitment is above</td>
+<td>25,000</td>
+<td>30,000</td>
+<td>40,000</td>
+<td>40,000</td>
+</tr>
+<tr>
+<td>Likely needs commitment at most</td>
+<td>15,000</td>
+<td>20,000</td>
+<td>30,000</td>
+<td>30,000</td>
+</tr>
+<tr>
+<td>Not a fit if loan is above</td>
+<td>30 L</td>
+<td>30 L</td>
+<td>25 L</td>
+<td>25 L</td>
+</tr>
+<tr>
+<td>Likely needs credit health Best</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+<td>no</td>
+</tr>
+</tbody>
+</table></div>
+<p>Credit health Bad is not a fit everywhere. Chola is assumed to follow Bajaj's rules.</p>
+<h2>12. Edge cases</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Case</th>
+<th>Expected</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Customer new to credit, no score</td>
+<td>Show NTC, offer NTC-accepting lenders</td>
+<td>[Built after demo]</td>
+</tr>
+<tr>
+<td>No exchange car</td>
+<td>Skip vehicle-number check</td>
+<td>[Built after demo]</td>
+</tr>
+<tr>
+<td>Bureau or other API returns nothing</td>
+<td>Plain label, move on, no dead end</td>
+<td>[Principle; test each call before launch]</td>
+</tr>
+<tr>
+<td>Wrong OTP</td>
+<td>Block and allow resend</td>
+<td><span class="tag tag-built">Built</span></td>
+</tr>
+<tr>
+<td>Name or PAN does not match DigiLocker</td>
+<td>Show score; send to manual review</td>
+<td>[Expressions built; review queue planned]</td>
+</tr>
+<tr>
+<td>Page refreshed mid-journey</td>
+<td>Values may arrive as text; formulas must convert them</td>
+<td>[Bug found and fixed once: TCS dropped to 0]</td>
+</tr>
+<tr>
+<td>Car not in the price table</td>
+<td>Price shows −1; let the executive type the price</td>
+<td><span class="tag tag-planned">Planned</span></td>
+</tr>
+<tr>
+<td>Approved amount blank on a rejection</td>
+<td>Must default to 0</td>
+<td>[Defect, see section 13]</td>
+</tr>
+<tr>
+<td>Exchange value filled after the loan was worked out</td>
+<td>Loan must recompute</td>
+<td>[Defect, see section 13]</td>
+</tr>
+</tbody>
+</table></div>
+<h2>13. Known defects at the end of the hackathon</h2>
+<ol>
+<li>Loan value ignored the exchange value (showed 15,17,728 with an exchange value of 3,13,000; it should have been 12,04,728).</li>
+<li>Submitting &quot;rejected&quot; gave &quot;Missing key approved_finance_amount&quot;.</li>
+<li>&quot;Income p.a&quot; on Routing-2 is net of EMI, not gross.</li>
+<li>Credit health is no longer visible on Steps 4 and 5.</li>
+<li>Routing-2 shows the car code, not the car name.</li>
+<li>The rejected lender is still offered again on Step 4.</li>
+<li>Formulas that need today's date use a fixed date, because FinStack rejected the date calls we tried.</li>
+</ol>
+<h2>14. UX</h2>
+<ul>
+<li>Labels in English with Kannada beside them; a language switch in the header. <span class="tag tag-built">Built</span></li>
+<li>Each form shows Incomplete or Verified, then &quot;Update form&quot;; Continue turns on after Verified. <span class="tag tag-built">Built</span></li>
+<li>Customer name shows under the step title. <span class="tag tag-built">Built</span></li>
+<li>To improve: labels say &quot;you&quot; while the executive is typing; show readable names for coded values.</li>
+</ul>
+<h2>15. North star metric and measures</h2>
+<p><strong>North star metric: completed journeys.</strong> A completed journey is a case that reaches the settlement step with a lender's decision recorded, counted per outlet per week. It captures what the cohort judges (a customer can finish with minimal typing) and what a dealer values (a decision at the counter).</p>
+<p><strong>Input metrics that move it:</strong> the share of started cases that finish consent, identity, verification, a lender send and a lender decision; minutes from consent to decision; fields typed per case. Targets are set after a pilot baseline, not before.</p>
+<p><strong>Supporting measures</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Definition</th>
+<th>Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Completion rate</td>
+<td>Cases reaching Settlement ÷ cases started</td>
+<td>Up</td>
+</tr>
+<tr>
+<td>Time to decision</td>
+<td>Minutes from consent to lender status</td>
+<td>Down</td>
+</tr>
+<tr>
+<td>Approval share</td>
+<td>Approved ÷ sent</td>
+<td>Up</td>
+</tr>
+<tr>
+<td>Reroute rate</td>
+<td>Cases that needed more than one lender</td>
+<td>Watch</td>
+</tr>
+<tr>
+<td>Commission matched</td>
+<td>Commission shown ÷ commission received</td>
+<td>Close to 1</td>
+</tr>
+<tr>
+<td>Guardrail</td>
+<td>Cases where the customer was quoted a wrong loan</td>
+<td>Zero</td>
+</tr>
+</tbody>
+</table></div>
+<p>Targets are set after a pilot baseline, not now. No numbers are claimed.</p>
+<h2>16. Validation</h2>
+<ul>
+<li><strong>Hypothesis:</strong> an executive can take a buyer from enquiry to a lender decision in one sitting with minimal typing.</li>
+<li><strong>Test done:</strong> a live demo where about 15 to 16 people used the journey, some with edge cases. [Built, observed]</li>
+<li><strong>What it showed:</strong> NTC customers and customers with no exchange car hit dead ends. Both were fixed after the demo.</li>
+<li><strong>Next test:</strong> a pilot with real dealership staff (section 21).</li>
+</ul>
+<h2>17. Non-functional needs</h2>
+<ul>
+<li>Slow or failing APIs must not stop the journey.</li>
+<li>Values must survive a page refresh.</li>
+<li>Personal data stays with FinStack and DigiLocker. The dealer side keeps only status and amounts.</li>
+</ul>
+<h2>18. MVP and scope</h2>
+<p><strong>In the MVP <span class="tag tag-built">Built</span>:</strong> one linear journey, consent by OTP, DigiLocker, price and loan, fit rules, one lender send with reroute, settlement figures. <strong>Later:</strong> lender API for status and trade advance, bank statement analysis, review queue, dealer login and dashboard, brands beyond Kia, used cars.</p>
+<h2>19. Dependencies</h2>
+<ul>
+<li>FinStack: journey builder, bureau, DigiLocker, vehicle and asset APIs. Some were not live at the time (PAN autofill and asset value waited on setup).</li>
+<li>A dealer's quote or DMS feed for prices (we used a Kia price table as the fallback).</li>
+<li>Lenders: status and trade advance data, and the list of lenders that accept NTC.</li>
+</ul>
+<h2>20. Privacy and safety</h2>
+<ul>
+<li>Consent with time and purpose before any bureau pull, confirmed by OTP on the customer's phone. [Built: terms tick plus OTP; whether FinStack stores the time of the tick is to confirm]</li>
+<li>Soft credit check only. The report is used for routing and is not shared with the lender. [Design rule from F23]</li>
+<li>Aadhaar goes through DigiLocker only. The dealer side never stores it.</li>
+<li>All figures in the demo are test values. Names, mobiles, PAN and Aadhaar are masked in this repository.</li>
+<li>Regulation to check before launch: RBI digital lending guidelines and the DPDP Act. [Assumption: reading only, not legal advice]</li>
+</ul>
+<h2>21. Risks</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Likelihood</th>
+<th>Impact</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wrong loan shown (defect 1)</td>
+<td>High until fixed</td>
+<td>High</td>
+<td>Fix the formula, re-test every path</td>
+</tr>
+<tr>
+<td>Lender status still set by hand</td>
+<td>Certain</td>
+<td>Medium</td>
+<td>Lender API or callback</td>
+</tr>
+<tr>
+<td>API slow or empty at the counter</td>
+<td>Medium</td>
+<td>High</td>
+<td>A &quot;not available&quot; path for each call</td>
+</tr>
+<tr>
+<td>Lender rules in the demo are our guesses</td>
+<td>Certain</td>
+<td>Medium</td>
+<td>Replace with each lender's real policy before pilot</td>
+</tr>
+<tr>
+<td>Dealers do not pay</td>
+<td>Unknown</td>
+<td>High</td>
+<td>Test the fee idea with dealers (we assumed Rs 10,000 per outlet per month)</td>
+</tr>
+<tr>
+<td>Whether FinStack's bureau access can serve a dealer client</td>
+<td>Unknown</td>
+<td>High</td>
+<td>Ask FinStack</td>
+</tr>
+</tbody>
+</table></div>
+<h2>22. Rollout and launch readiness</h2>
+<p>Rollout phases are in <code>../launch/production-launch-plan.md</code> (hypothetical, to refine with pilot data). Readiness checklist: defects 1 and 2 fixed; every outside call tested with an empty answer; real lender terms; consent record confirmed; a date variable or API for today's date; a dealer interview round.</p>
+<h2>23. Open questions and assumptions</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Question</th>
+<th>Working answer</th>
+<th>Confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Which lenders accept NTC?</td>
+<td>Unknown, to confirm per lender</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Is Chola's rule the same as Bajaj's?</td>
+<td>Assumed yes</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Who sets the lender status in production?</td>
+<td>A lender API or callback</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>Does FinStack save the time of the consent tick?</td>
+<td>To confirm</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>What will a dealer pay?</td>
+<td>Rs 10,000 per outlet per month, assumed</td>
+<td>Low</td>
+</tr>
+<tr>
+<td>Do dealers want one tool for finance and trade advance?</td>
+<td>Believed yes, untested</td>
+<td>Low</td>
+</tr>
+</tbody>
+</table></div>
+<h2>24. Recommendation</h2>
+<p>Fix the loan formula and the rejected path first, since they affect the customer's money and the reroute. Then run a pilot in one or two Kia outlets with real lender terms, measure completion and time to decision, and only then decide on dealer fees and a lender API.</p>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

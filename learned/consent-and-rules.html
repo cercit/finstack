@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Consent, KYC rules and lender rules | Sameer Mittimani</title><meta name="description" content="Consent, KYC and lender rules, and how they shaped the product.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Consent, KYC rules and lender rules | Sameer Mittimani"><meta property="og:description" content="Consent, KYC and lender rules, and how they shaped the product."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Learned</a><div class="project-meta"><span>cohort / notes</span></div><h1>Consent, KYC rules and lender rules</h1><p class="case-deck">Consent, KYC and lender rules, and how they shaped the product.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>What I learned about doing a lending journey legally and sensibly, and how it shaped the product. Written in my own words. <strong>[verify]</strong> marks things I need to check before quoting.</p>
+<hr />
+<h2>Consent</h2>
+<ul>
+<li><strong>Nothing is checked before the customer agrees.</strong> The first form carries a consent tick, and every credit report call needs a consent timestamp.</li>
+<li><strong>Soft pull only.</strong> A soft pull leaves no enquiry on the customer's report. A hard pull does, and the platform cannot make those for a software client; the licensed lender does.</li>
+<li><strong>Say why the data is collected,</strong> keep the minimum, mask it, and delete it when the consent period ends (the DPDP Act points).</li>
+<li><strong>A report is seen only with consent.</strong> Even a bank needs at least a tick.</li>
+<li><strong>A full name plus a mobile number can be enough</strong> to pull someone's PAN, address and date of birth, so treat that pair carefully.</li>
+</ul>
+<p>In DealerFinance: Step 1 is the terms tick followed by a 6-digit code sent to the customer's own phone, so consent is confirmed by the customer, not typed by the executive. Whether the platform stores the time of the tick is still to confirm.</p>
+<h2>KYC</h2>
+<ul>
+<li>Two proofs: identity and address. Valid documents include PAN, Aadhaar, passport, driving licence and voter ID. PAN carries no address.</li>
+<li><strong>DigiLocker</strong> gives a signed document straight from the source. The customer is redirected to confirm with an OTP, which interrupts the journey.</li>
+<li><strong>Screening</strong> on identity: criminal records, politically exposed persons, do-not-lend lists, anti-money-laundering lists.</li>
+<li><strong>Age:</strong> 18 is the legal minimum, but most lenders set 21 or higher.</li>
+<li><strong>Address</strong> has three layers: the document address, &quot;is this your current address?&quot;, and a field visit for larger loans.</li>
+<li><strong>Name matching must be fuzzy.</strong> Indian names vary by spelling and initials. A good rule lets a borderline match continue but re-checks it later, and sends it to a person, so good customers are not rejected.</li>
+<li><strong>Pin codes</strong> are tagged green, amber or red by repayment history and collection reach. Lenders lend near where they have a presence.</li>
+</ul>
+<h2>Lender rules (how a lender decides)</h2>
+<p>The four pillars of underwriting: contactability, capability, collectability and intent. Cheap checks (age, pin code, identity) go first; expensive ones (bank statements, field visits) later.</p>
+<p>Rules we built into DealerFinance, as thresholds per lender (illustrative, not any lender's real policy):</p>
+<ul>
+<li>a minimum score, a maximum monthly commitment and a maximum loan amount per lender;</li>
+<li>a credit health rating (Bad, Good, Best) from suit-filed balance, defaults and total outstanding;</li>
+<li>a fit label per lender: likely, possible or not a fit;</li>
+<li>a path for customers new to credit (NTC), where only lenders that accept NTC are offered.</li>
+</ul>
+<h2>Why this matters for a product</h2>
+<ul>
+<li>The dealer is not the lender. The tool routes and informs; <strong>the lender decides.</strong> Our credit report is used only to route and is not shared on.</li>
+<li>A credit-thin person with verified stable income can be a better bet than a thin score. That is why &quot;no score&quot; must be a valid path, not a rejection.</li>
+<li>Every rule filters the customer segment. Name the segment first (new-car buyers at dealerships) and build the rules for it.</li>
+</ul>
+<h2>Open or to verify</h2>
+<ul>
+<li>The current rules on deemed address proofs such as utility bills <strong>[verify]</strong>.</li>
+<li>Whether the platform stores the consent timestamp itself.</li>
+<li>Which lenders accept customers new to credit.</li>
+</ul>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

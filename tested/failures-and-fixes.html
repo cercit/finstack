@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Failures and fixes | Sameer Mittimani</title><meta name="description" content="What broke, why, the fix and the lesson, with open items marked.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Failures and fixes | Sameer Mittimani"><meta property="og:description" content="What broke, why, the fix and the lesson, with open items marked."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="../built/index.html">Built</a><a href="index.html" aria-current=page>Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="../built/index.html">Built</a><a href="index.html" aria-current=page>Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Tested</a><div class="project-meta"><span>testing / lessons</span></div><h1>Failures and fixes</h1><p class="case-deck">What broke, why, the fix and the lesson, with open items marked.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>What broke while building and testing DealerFinance, why, what we did, and what I would do differently. The status is as of 18 Oct 2026.</p>
+<p><strong>Status key:</strong> Fixed = verified working. Open = known and not fixed yet. Process = a mistake in how we worked, not in the product.</p>
+<h2>Product and formula failures</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>What broke</th>
+<th>Cause</th>
+<th>Fix</th>
+<th>Lesson</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>A price lookup returned the whole dictionary and the field failed with a &quot;not of type float&quot; error</td>
+<td>The dictionary was not wrapped in brackets before <code>.get(...)</code></td>
+<td>Write <code>({...}).get(key, default)</code></td>
+<td>Brackets decide what <code>.get</code> acts on</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>2</td>
+<td>TCS dropped to 0 after a page refresh, and the loan and TCS disagreed</td>
+<td>After a refresh the value reached the formula as text, so a &quot;greater than&quot; test failed quietly</td>
+<td>Convert with <code>int(...)</code> or keep values numeric</td>
+<td>A refresh can change a number's type. Test with a refresh</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Insurance showed the same amount as the vehicle price</td>
+<td>Not recorded at the time</td>
+<td>Rebuilt it as 4% of the ex-showroom variable</td>
+<td>Name each value once and build on it</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>4</td>
+<td>On-road price and loan treated TCS differently</td>
+<td>Two formulas made different assumptions</td>
+<td>Decision: on-road leaves TCS out; the loan subtracts it</td>
+<td>Write the rule down before writing formulas</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Loan and commission showed a trailing &quot;.0&quot;</td>
+<td>A whole number came back as a decimal</td>
+<td>Wrap in <code>int(...)</code> where it matters</td>
+<td>Cosmetic, but visible to a customer</td>
+<td>Open (cosmetic)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>The lender drop-down showed &quot;Bajaj&quot; while formulas expected &quot;bajaj&quot;</td>
+<td>Displayed text and saved value are different things</td>
+<td>Use lowercase values, or <code>.lower()</code></td>
+<td>Check the saved value, not the label</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>7</td>
+<td>A fuzzy name match using a standard library was refused</td>
+<td>The platform restricts imports</td>
+<td>Rebuilt it from built-in functions (sorted words, pairs of letters, set overlap)</td>
+<td>Test in the real platform early</td>
+<td>Fixed</td>
+</tr>
+<tr>
+<td>8</td>
+<td>A formula that reads today's date was refused</td>
+<td>The platform rejected the date calls we tried</td>
+<td>Use a fixed date until the platform offers a date variable</td>
+<td>Ask the platform team what is supported</td>
+<td>Open</td>
+</tr>
+<tr>
+<td>9</td>
+<td>The loan ignored the exchange value (15,17,728 shown with an exchange value of 3,13,000; it should be 12,04,728)</td>
+<td>The loan was worked out before the exchange value filled in</td>
+<td>Recompute the loan after the exchange value is set; re-test</td>
+<td>Check money fields by hand on every path</td>
+<td>Open</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Submitting &quot;rejected&quot; gave &quot;Missing key approved_finance_amount&quot;</td>
+<td>The approved amount only exists on the approved path</td>
+<td>Default it to 0 on a rejection</td>
+<td>Every route needs every field it reads</td>
+<td>Open</td>
+</tr>
+<tr>
+<td>11</td>
+<td>The rejected lender was offered again on Step 4</td>
+<td>The list did not remove it</td>
+<td>Remove the rejected lender from the list</td>
+<td>Close the loop on a reroute</td>
+<td>Open</td>
+</tr>
+<tr>
+<td>12</td>
+<td>&quot;Income p.a&quot; was net of EMI, not gross</td>
+<td>The figure works out as (monthly income - EMI) x 12, which is net of EMI</td>
+<td>Rename the label or change the formula</td>
+<td>A label is a promise</td>
+<td>Open</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Credit health disappeared from Steps 4 and 5</td>
+<td>It is not on the final screens (the formula still runs)</td>
+<td>Show it again on Step 4</td>
+<td>Keep the reason for a decision visible</td>
+<td>Open</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Step 5 showed the car code, not the name</td>
+<td>The saved key was shown</td>
+<td>Show the readable name</td>
+<td>Show people names, not keys</td>
+<td>Open</td>
+</tr>
+</tbody>
+</table></div>
+<h2>Found at the live demo</h2>
+<p>See <a href="live-demo-lessons.html">live-demo-lessons.md</a>: customers new to credit with no score, and the vehicle-number check that stopped the journey when there was no exchange car. Both are fixed.</p>
+<h2>Process failures</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>What went wrong</th>
+<th>Why</th>
+<th>What I do now</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>P1</td>
+<td>The first submission email did not follow the required format (no team number in the subject)</td>
+<td>I did not read the rule before sending</td>
+<td>Read the submission rules before the last day, and check the format against the message</td>
+</tr>
+<tr>
+<td>P2</td>
+<td>The production launch plan was sent after the deadline</td>
+<td>I treated it as a separate task and left it to the end</td>
+<td>Plan the written deliverable at the same time as the build</td>
+</tr>
+<tr>
+<td>P3</td>
+<td>My Day 1 notes had the hackathon format wrong (they said to build a front-end on the APIs; the recording says to build on the form and journey builders)</td>
+<td>I wrote from memory before checking the recording</td>
+<td>Check notes against the source before using them</td>
+</tr>
+<tr>
+<td>P4</td>
+<td>Price tables were built for five other car brands when only Kia was needed</td>
+<td>I assumed the scope instead of asking</td>
+<td>Confirm scope before building anything beyond the request</td>
+</tr>
+<tr>
+<td>P5</td>
+<td>A short reply such as &quot;ok&quot; was taken as a go-ahead</td>
+<td>I read it as approval</td>
+<td>A bare acknowledgement is not approval; ask</td>
+</tr>
+<tr>
+<td>P6</td>
+<td>Edge cases were found by other people at the demo, not by our own tests</td>
+<td>We had no edge-case list before building</td>
+<td>Write the edge-case matrix first</td>
+</tr>
+</tbody>
+</table></div>
+<h2>What I would do differently</h2>
+<ol>
+<li>Write the edge-case matrix before building, and run every outside call with an empty answer.</li>
+<li>Test each formula in the platform on the day it is written, not only in plain code.</li>
+<li>Check every money field by hand on the approved, rejected and no-exchange paths.</li>
+<li>Read the submission rules on day one and plan the written deliverable early.</li>
+<li>Keep a short running log of each failure as it happens, with the cause.</li>
+</ol>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

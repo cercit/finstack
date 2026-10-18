@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DealerFinance: decisions log | Sameer Mittimani</title><meta name="description" content="The design decisions, and how the logic was built without a database.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="DealerFinance: decisions log | Sameer Mittimani"><meta property="og:description" content="The design decisions, and how the logic was built without a database."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="index.html" aria-current=page>Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="index.html" aria-current=page>Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Built</a><div class="project-meta"><span>product / documents</span></div><h1>DealerFinance: decisions log</h1><p class="case-deck">The design decisions, and how the logic was built without a database.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>The design decisions we made, one line each, and what happened to them. The full original log (F1 to F26, with the &quot;do&quot; and &quot;don't&quot; lists) is in archive/prd-decisions-full.md.</p>
+<h2>How the logic was built without a database</h2>
+<p>FinStack gave us forms and journeys but no database or lending system. So every calculation and rule sits in a <strong>logic variable</strong>: a short Python expression that FinStack runs inside the journey. These did most of the work:</p>
+<ul>
+<li><strong>Auto-fill calculations:</strong> price, road tax, insurance, TCS, on-road price, loan value, LTV and the finance amount follow from the car and the down payment.</li>
+<li><strong>Complex drop-downs and lookups:</strong> the Kia model list, price and road-tax tables, trade advance limits and commission rates are dictionaries inside expressions.</li>
+<li><strong>Locked fields:</strong> pre-filled values (PAN, prices, loan) are read-only, so the executive cannot overwrite them.</li>
+<li><strong>Conditional fields:</strong> the vehicle number appears only when the customer has an exchange car; the approved amount appears only when the lender approves.</li>
+<li><strong>Rules:</strong> credit health, the fit label for each lender, the name and PAN checks, age from date of birth, and the exchange-value estimate.</li>
+</ul>
+<p>The limits: each variable is one expression, with no libraries and restricted imports, so some ideas (a fuzzy-match library, today's date) had to be rebuilt from plain functions. The expressions themselves are in <code>product/formulas/formulas.md</code> in the repository.</p>
+<h2>Decisions</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Decision</th>
+<th>Why</th>
+<th>What happened</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1</td>
+<td>The dealer principal owns the account and gives logins to the finance coordinator, sales executives and CRM staff. Every action is logged</td>
+<td>Clear ownership and a trail</td>
+<td>Not built (no login on the platform)</td>
+</tr>
+<tr>
+<td>F2</td>
+<td>&quot;Send to lender&quot; is a permission, by default the finance coordinator's, or whoever does that job</td>
+<td>Small dealers combine roles</td>
+<td>Not built</td>
+</tr>
+<tr>
+<td>F3</td>
+<td>Leads arrive three ways: CRM file, walk-in with a code on the customer's phone, or a self-fill link</td>
+<td>Assisted and self-serve</td>
+<td>One journey for both, built</td>
+</tr>
+<tr>
+<td>F4</td>
+<td>No consent, no credit check: the lead waits</td>
+<td>RBI rules on credit reports</td>
+<td>Built (terms tick plus code). Open: how long to keep on-hold data (30 days suggested)</td>
+</tr>
+<tr>
+<td>F5</td>
+<td>Light identity check at the dealer stage: lookup on name and mobile, PAN only if no hit, name match as a warning</td>
+<td>Keep KYC light</td>
+<td>Replaced by F16</td>
+</tr>
+<tr>
+<td>F6</td>
+<td>Income is declared by the customer (monthly income or comfortable EMI) and labelled &quot;declared, not verified&quot;</td>
+<td>The dealer does not verify income</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>F7</td>
+<td>Lender fit is a simple checklist per lender, giving &quot;likely, possible or not a fit&quot;, never a decision</td>
+<td>The dealer does not underwrite</td>
+<td>Built as one formula</td>
+</tr>
+<tr>
+<td>F8</td>
+<td>Lender staff update the case stages: sent, under approval, approved or rejected, sanctioned, disbursed</td>
+<td>Live status for the dealer</td>
+<td>Not built; status set by hand</td>
+</tr>
+<tr>
+<td>F9</td>
+<td>Commission is worked out per case from the lender's rate, then claimed with GST and TDS and ticked as received</td>
+<td>Gives the dealer a daily reason to use the tool</td>
+<td>The commission figure is built; the ledger is not</td>
+</tr>
+<tr>
+<td>F10</td>
+<td>The principal's home screen shows funnel, lender scorecard, commission tracker and reroute view</td>
+<td>See what lenders really do</td>
+<td>Not built</td>
+</tr>
+<tr>
+<td>F11</td>
+<td>Up to three lenders automatically; a fourth needs the principal's approval; the customer is told each time</td>
+<td>Limits enquiries on the customer's report</td>
+<td>Reroute built; the cap is not</td>
+</tr>
+<tr>
+<td>F12</td>
+<td>Track each lender's trade advance room and show it as a tag</td>
+<td>Dealers want funded lenders used</td>
+<td>Built with demo limits</td>
+</tr>
+<tr>
+<td>F13</td>
+<td>Rank by customer preference, then trade advance</td>
+<td>Superseded by F25</td>
+<td>Replaced</td>
+</tr>
+<tr>
+<td>F14</td>
+<td>Include everything in the first build</td>
+<td>Scope to be cut later</td>
+<td>Replaced by F20, then by the one-journey change</td>
+</tr>
+<tr>
+<td>F15</td>
+<td>Consent is one line on the enquiry form, confirmed by a code; no separate consent message</td>
+<td>&quot;Subtle&quot; finance scores highest and stays compliant</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>F16</td>
+<td>DigiLocker KYC before the case is sent</td>
+<td>Identity and address without document copies</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>F17</td>
+<td>A bank statement step for lenders that need income proof (upload and analysis, not Account Aggregator)</td>
+<td>Verified income where needed</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>F18</td>
+<td>One manual review queue for edge cases (weak name match, no credit hit, possible fit, overrides, a fourth lender)</td>
+<td>The brief asked for manual approval of edge cases</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>F19</td>
+<td>More credit data in the fit rules: recent enquiries, late payments, pin code band</td>
+<td>Better fit</td>
+<td>Credit health built; the rest not</td>
+</tr>
+<tr>
+<td>F20</td>
+<td>Build onboarding, match and send first; the commission ledger and lender portal later</td>
+<td>Platform is built for onboarding</td>
+<td>Superseded by F26</td>
+</tr>
+<tr>
+<td>F21</td>
+<td>A lead lender deploys it at its partner dealers</td>
+<td>First idea of who runs it</td>
+<td>Replaced by F22</td>
+</tr>
+<tr>
+<td>F22</td>
+<td>Dealers are the paying customer (a software fee)</td>
+<td>The dealer has the pain and the budget</td>
+<td>Fee is an assumption</td>
+</tr>
+<tr>
+<td>F23</td>
+<td>The credit report is used only to route; it is not passed to lenders</td>
+<td>Keeps the dealer stage compliant</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>F24</td>
+<td>We differ from carmaker finance portals: dealer-side, multi-brand, and showing trade advance, commission and lender speed</td>
+<td>A real gap</td>
+<td>Pitch point</td>
+</tr>
+<tr>
+<td>F25</td>
+<td>Rank by fit, then the customer's choice, then lowest EMI. Dealer factors are tags and tie-breakers only</td>
+<td>Do not push the customer to a costlier lender</td>
+<td>Fit and tags built</td>
+</tr>
+<tr>
+<td>F26</td>
+<td>Trade advance, commission and lender speed go into the build as tags</td>
+<td>They are what set us apart</td>
+<td>Trade advance and commission built; speed not</td>
+</tr>
+</tbody>
+</table></div>
+<h2>What changed on 13 October</h2>
+<p>The platform had no dealer login, database or menu setup, so the design became <strong>one linear journey</strong> used by the customer or a dealer executive. Cars are Kia only and there are four lenders. One-time-code consent and DigiLocker were built. The review queue, lender portal, ledger and dashboard were not. See the <a href="prd.html">PRD</a> for what was built and the <a href="../launch/index.html">launch plan</a> for what comes next.</p>
+<h2>Still open</h2>
+<ul>
+<li>How long to keep the data of a lead that gave no consent.</li>
+<li>Whether FinStack's bureau access can serve a dealer, who is not a lender.</li>
+</ul>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

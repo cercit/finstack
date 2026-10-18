@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Learned to used | Sameer Mittimani</title><meta name="description" content="Each class topic next to where it shows up in the product, and how far it got.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Learned to used | Sameer Mittimani"><meta property="og:description" content="Each class topic next to where it shows up in the product, and how far it got."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Learned</a><div class="project-meta"><span>cohort / notes</span></div><h1>Learned to used</h1><p class="case-deck">Each class topic next to where it shows up in the product, and how far it got.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>Each row links something taught in the cohort to where it shows up in the product, and says how far it got. <strong>Built</strong> = in the journey. <strong>Partly</strong> = built as a formula or rule but not fully on a screen. <strong>Planned</strong> = designed, not built. <strong>Not used</strong> = learned, deliberately left out.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>What we learned</th>
+<th>Where it came from</th>
+<th>Where we used it</th>
+<th>How far</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nothing is checked before the customer agrees; a bureau call needs consent with a timestamp</td>
+<td>Day 1, Day 2</td>
+<td>Step 1: terms tick, then a 6-digit code to the customer's own phone</td>
+<td>Built (storage of the tick time to confirm)</td>
+</tr>
+<tr>
+<td>Soft pull only; hard pulls belong to the licensed lender</td>
+<td>Day 1, Day 2</td>
+<td>Credit score and summaries come from a soft pull</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>KYC is two proofs; DigiLocker gives signed documents but redirects the user</td>
+<td>Day 2</td>
+<td>DigiLocker stage between Step 1 and Step 2</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>Chain outputs into inputs so the customer types little</td>
+<td>Pre-read 5, Day 2</td>
+<td>PAN, name and date of birth pre-filled; Customer_Inputs fully pre-filled</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>Names rarely match exactly; use a fuzzy match and re-check rather than reject</td>
+<td>Day 2, Pre-read 5</td>
+<td>A name-match expression built from built-in functions; mismatch rule</td>
+<td>Partly</td>
+</tr>
+<tr>
+<td>Exact match for PAN</td>
+<td>Day 2</td>
+<td>PAN match gives 100 or 0</td>
+<td>Partly</td>
+</tr>
+<tr>
+<td>Put cheap checks first and costly ones later</td>
+<td>Day 2</td>
+<td>Skip the vehicle-number lookup when there is no exchange car</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>&quot;No data&quot; is a normal answer; new-to-credit customers are the market</td>
+<td>Day 2</td>
+<td>NTC label and an NTC-only lender path</td>
+<td>Built after the demo</td>
+</tr>
+<tr>
+<td>Underwriting asks four things: contactability, capability, collectability, intent</td>
+<td>Day 2</td>
+<td>Lender fit rules on score, credit health, loan size and monthly commitment</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>Pin codes are green, amber or red</td>
+<td>Day 2, Pre-read 5</td>
+<td>An extra lender rule idea</td>
+<td>Not used</td>
+</tr>
+<tr>
+<td>Lenders borrow at different costs, so they serve different customers</td>
+<td>Day 1, Pre-reads 3 and 4</td>
+<td>Four lenders with different thresholds, commission and trade advance</td>
+<td>Built (test values)</td>
+</tr>
+<tr>
+<td>Origination is where lenders differ; servicing is regulated</td>
+<td>Day 1</td>
+<td>We built origination and settlement figures only; no servicing</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>Account Aggregator is for regulated lenders; bank statement upload is open to all</td>
+<td>Day 2, Pre-read 5</td>
+<td>Bank statement analysis planned; income is declared today</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>The bank statement step is the biggest funnel drop-off</td>
+<td>Pre-read 5</td>
+<td>Kept out of the dealer stage</td>
+<td>Not used</td>
+</tr>
+<tr>
+<td>A rule engine should filter the target customer, not &quot;all of India&quot;</td>
+<td>Day 2</td>
+<td>New-car buyers at Bengaluru Kia dealers</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>Assisted onboarding lets staff fill a journey for the customer</td>
+<td>Day 2</td>
+<td>The executive fills the journey for the customer</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>The back office can list, filter and review cases</td>
+<td>Day 1, Day 2</td>
+<td>&quot;My cases&quot; and a review queue</td>
+<td>Planned</td>
+</tr>
+<tr>
+<td>One person on forms, one on the journey, to avoid overwriting</td>
+<td>Day 2</td>
+<td>Followed the same split with my teammate</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>A complete simple product beats a half-built big one</td>
+<td>Day 1, final brief</td>
+<td>Cut the portal, dashboard and ledger; finished one journey</td>
+<td>Built</td>
+</tr>
+<tr>
+<td>Test edge cases</td>
+<td>Final brief</td>
+<td>The live demo found two we missed; a test list is written</td>
+<td>Built after the demo</td>
+</tr>
+<tr>
+<td>A written launch plan covers where more data can be pre-filled</td>
+<td>Final brief (option 1)</td>
+<td>The production launch plan</td>
+<td>Built (late)</td>
+</tr>
+<tr>
+<td>Logic variables are single expressions with limits</td>
+<td>Hands-on, our build</td>
+<td>Nine rules in <a href="no-code-platform.html">no-code-platform.md</a></td>
+<td>Built</td>
+</tr>
+</tbody>
+</table></div>
+<p>How to read the gaps: the rows marked Planned or Not used are the honest edge of what we did in five days. They are also the roadmap.</p>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

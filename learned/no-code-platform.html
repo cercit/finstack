@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a no-code lending platform works, and what building on it taught me | Sameer Mittimani</title><meta name="description" content="How it is put together, and nine rules for its logic variables.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="How a no-code lending platform works, and what building on it taught me | Sameer Mittimani"><meta property="og:description" content="How it is put together, and nine rules for its logic variables."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Learned</a><div class="project-meta"><span>cohort / notes</span></div><h1>How a no-code lending platform works, and what building on it taught me</h1><p class="case-deck">How it is put together, and nine rules for its logic variables.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>FinStack is software for lenders. This note covers how the platform is put together and the rules I learned the hard way while building DealerFinance on it. Written in my own words.</p>
+<hr />
+<h2>The shape of the platform</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>What it is</th>
+<th>How I used it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API hub</td>
+<td>Ready verification APIs</td>
+<td>Bureau soft pull, DigiLocker, vehicle lookup</td>
+</tr>
+<tr>
+<td>Forms</td>
+<td>The building block of a journey. Two kinds: forms that call an API, and custom forms</td>
+<td>One form per step; custom forms for income, EMI and the car</td>
+</tr>
+<tr>
+<td>Journey</td>
+<td>Orders forms into steps, sets the unique identifier and what happens on failure</td>
+<td>Six steps and DigiLocker; a rejected case returns to an earlier step</td>
+</tr>
+<tr>
+<td>Rules</td>
+<td>Verification rules, visibility rules, logic variables</td>
+<td>Name match, a field that shows only when exchange is Yes, and all the money formulas</td>
+</tr>
+<tr>
+<td>Back office</td>
+<td>Listing, filters, review screens</td>
+<td>Planned as &quot;My cases&quot;</td>
+</tr>
+<tr>
+<td>Audit trail</td>
+<td>Every entry and response logged</td>
+<td>Used as the consent record</td>
+</tr>
+</tbody>
+</table></div>
+<p>The platform serves the lender's staff and customers. It is a horizontal tool: it orchestrates many services rather than doing one thing deeply.</p>
+<h2>Logic variables: the rules I learned</h2>
+<p>A logic variable is a short expression that computes a value from other fields. There is no programming environment around it.</p>
+<ol>
+<li><strong>It is one expression.</strong> No statements, no libraries. Plain operators, <code>x if condition else y</code>, and built-in functions.</li>
+<li><strong>A dictionary pasted as text is just a string.</strong> Keep the dictionary inside the expression.</li>
+<li><strong>Put brackets around a dictionary before <code>.get</code>:</strong> <code>({...}).get(key, default)</code>. Without them, the whole dictionary came back and the field failed with a type error.</li>
+<li><strong>After a page refresh a number can come back as text.</strong> A comparison then fails quietly (our TCS dropped to 0). Wrap values in <code>int(...)</code>.</li>
+<li><strong>Keys must match exactly.</strong> Use lowercase, snake_case keys and lowercase lender names, or call <code>.lower()</code> on the saved value.</li>
+<li><strong>Imports are restricted.</strong> Our attempts to read today's date through <code>datetime</code> and to use <code>difflib</code> for a fuzzy match were refused. We rebuilt the fuzzy match with plain built-ins (sorted words, pairs of letters, set overlap). For today's date we used a fixed date until a date variable exists.</li>
+<li><strong>Test the formula in plain Python first</strong>, then paste it in. Python passing does not prove FinStack accepts it.</li>
+<li><strong>A name in the display can differ from the saved value.</strong> The financier drop-down showed &quot;Bajaj&quot; while the formulas expected &quot;bajaj&quot;. Check the saved value.</li>
+<li><strong>Labels are easy; variable paths are not.</strong> Fix a typo in the display name only, never in the variable path.</li>
+</ol>
+<h2>Journey design lessons</h2>
+<ul>
+<li><strong>Test each form once</strong> after building it, so the system learns its output fields.</li>
+<li><strong>Two people can edit one journey but may overwrite each other.</strong> One person on forms, one on the journey.</li>
+<li><strong>Changes to a live journey do not reach people already past that step.</strong> Copy the journey and roll out to a small share.</li>
+<li><strong>A rejection must have a route.</strong> Ours had one on paper, but the field that makes the reroute possible did not exist on the rejected path, so the first test failed.</li>
+<li><strong>Every outside call needs an empty-answer path.</strong> Two dead ends found at the live demo (no score, no exchange car) came from this.</li>
+</ul>
+<h2>What the platform could not do for us</h2>
+<p>No separate login for dealers, no database to remember earlier cases, and no menu setup. That is why DealerFinance became one linear journey used by a customer or an executive, with fixed demo values for the trade advance used so far.</p>
+<h2>What I took away</h2>
+<p>The hard part of a no-code build is not the clicking. It is knowing the rules the platform follows, testing each formula outside it first, and designing for the cases where an outside service returns nothing.</p>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

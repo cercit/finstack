@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The fintech APIs we met, and what each one gave us | Sameer Mittimani</title><meta name="description" content="Credit reports, PAN, Aadhaar, DigiLocker, vehicle lookup and statements: what goes in and out.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="The fintech APIs we met, and what each one gave us | Sameer Mittimani"><meta property="og:description" content="Credit reports, PAN, Aadhaar, DigiLocker, vehicle lookup and statements: what goes in and out."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Learned</a><div class="project-meta"><span>cohort / notes</span></div><h1>The fintech APIs we met, and what each one gave us</h1><p class="case-deck">Credit reports, PAN, Aadhaar, DigiLocker, vehicle lookup and statements: what goes in and out.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>A lending journey is a chain of calls to outside services. Each call has an input, an output, a cost and a way to fail. This note lists the ones from the cohort and says which we used. Written in my own words. <strong>[verify]</strong> marks class claims I have not checked.</p>
+<hr />
+<h2>The map</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Check</th>
+<th>Input</th>
+<th>Output</th>
+<th>Used in DealerFinance</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Basic credit lookup (a &quot;simple credit check&quot;)</td>
+<td>Name and mobile</td>
+<td>Whether the person is in the system, plus PAN, past addresses, date of birth, other mobiles. No score</td>
+<td>Studied in class</td>
+</tr>
+<tr>
+<td>Credit report, soft pull</td>
+<td>Name, PAN, date of birth, mobile (what KYC already returned)</td>
+<td>Score, accounts, enquiries, summaries</td>
+<td>Yes: score and the summaries on Step 4</td>
+</tr>
+<tr>
+<td>PAN verification</td>
+<td>PAN</td>
+<td>Name, type of holder</td>
+<td>Yes, through DigiLocker's PAN details</td>
+</tr>
+<tr>
+<td>Aadhaar KYC</td>
+<td>Aadhaar number, then OTP to the Aadhaar-linked phone</td>
+<td>Name, address, date of birth</td>
+<td>Yes, through DigiLocker</td>
+</tr>
+<tr>
+<td>DigiLocker</td>
+<td>Redirect and consent</td>
+<td>Signed documents from the source</td>
+<td>Yes: PAN name, PAN number, date of birth</td>
+</tr>
+<tr>
+<td>Vehicle search (registration lookup)</td>
+<td>Vehicle number</td>
+<td>Make, model, engine size, fuel type, manufacture month and year, registration date; also owner details</td>
+<td>Yes, for the exchange car (owner details not used or stored)</td>
+</tr>
+<tr>
+<td>Bank statement analysis</td>
+<td>Statement file, or a login or consent flow</td>
+<td>Salary, expenses, average balance, suspicious items</td>
+<td>Studied; planned, not built</td>
+</tr>
+<tr>
+<td>Account Aggregator</td>
+<td>Mobile, OTP, consent</td>
+<td>Read-only bank data</td>
+<td>Not usable: only regulated lenders can use it</td>
+</tr>
+</tbody>
+</table></div>
+<h2>The credit report in our build</h2>
+<p>The soft-pull response came back in sections, and we used three:</p>
+<ul>
+<li><strong>Account summary:</strong> number of active, closed and total accounts, defaults, suit-filed balance, total outstanding (secured and unsecured). We built credit health (Bad, Good, Best) from three of these fields.</li>
+<li><strong>Enquiry summary:</strong> counts of enquiries in the last 7, 30, 90 and 180 days. Many recent enquiries suggest a borrower who is shopping around.</li>
+<li><strong>Non-credit enquiry summary:</strong> same windows, for non-loan enquiries. We left these out.</li>
+<li><strong>Score:</strong> missing for people new to credit. We added an &quot;NTC&quot; label and a path for it after the live demo.</li>
+</ul>
+<h2>The vehicle lookup in our build</h2>
+<p>It returns the manufacturer's name, model, engine size, fuel type, norms and registration date, and the manufacturing month and year. Our exchange-value rule uses three of these: the maker, the engine size and the manufacturing month and year. The lookup only makes sense when the customer has an exchange car, so we skip it when they do not.</p>
+<h2>Things I learned about using APIs</h2>
+<ol>
+<li><strong>Chain outputs into inputs.</strong> What KYC returns is what the credit report asks for, so the customer types almost nothing.</li>
+<li><strong>A &quot;not found&quot; answer is normal.</strong> A no-hit is not an error. Plan the next step for it.</li>
+<li><strong>Every call costs money</strong>, so order them cheap to costly and skip the ones that do not apply (the vehicle check with no exchange car).</li>
+<li><strong>Vendors fail.</strong> The platform lets several vendors serve one check, with fallback.</li>
+<li><strong>Formats differ</strong> (dates, names), so someone must standardise them. The platform did that for us.</li>
+<li><strong>Consent comes first.</strong> Every credit call needs the customer's consent and a timestamp.</li>
+<li><strong>Some data is only for regulated lenders</strong> (Account Aggregator, hard pulls). Check who may call an API before designing around it.</li>
+<li><strong>Mock an API when the real one is sensitive or slow.</strong> The platform lets you host a fake response.</li>
+</ol>
+<h2>Open or to verify</h2>
+<ul>
+<li>The coverage and reporting claims about bureaus <strong>[verify]</strong>.</li>
+<li>Which exact bureau product our final journey used for the basic lookup. We used the soft pull for the score.</li>
+</ul>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

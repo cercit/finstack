@@ -1,0 +1,561 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DealerFinance: sprint plan | Sameer Mittimani</title><meta name="description" content="Epics, stories, tasks and gates.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="DealerFinance: sprint plan | Sameer Mittimani"><meta property="og:description" content="Epics, stories, tasks and gates."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="index.html" aria-current=page>Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="../learned/index.html">Learned</a><a href="index.html" aria-current=page>Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Built</a><div class="project-meta"><span>product / documents</span></div><h1>DealerFinance: sprint plan</h1><p class="case-deck">Epics, stories, tasks and gates.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p><strong>Status:</strong> draft for review, written 18 Oct 2026.
+<strong>Team 6:</strong> Sameer S Mittimani and Aditya Sharan.
+<strong>Format:</strong> the work-breakdown from Class 11: epic &gt; story &gt; Given/When/Then &gt; scenarios and edge cases &gt; tasks (team, output, estimate) &gt; sequencing gates &gt; scope, time and cost &gt; roadmap.
+<strong>Honesty note:</strong> this plan is written after the sprint, from the files, notes and chat that exist. Dates come from file times and the cohort chat. We did not record estimates at the time, so the estimate column says &quot;not recorded&quot; instead of inventing days. Class 11's own rule applies: task days are effort, not elapsed time.</p>
+<hr />
+<h2>1. Sprint frame</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint</td>
+<td>Sprint 1: FinStack cohort hackathon</td>
+</tr>
+<tr>
+<td>Working days</td>
+<td>9, 10, 12 and 13 Oct 2026 (11 Oct was an office-closed day; work continued at home)</td>
+</tr>
+<tr>
+<td>Goal</td>
+<td>A customer or dealership executive can finish a car-loan journey on FinStack with minimal typing, and the executive can see the cash needed and the dealer's trade advance and commission</td>
+</tr>
+<tr>
+<td>Fixed constraint</td>
+<td>The demo slot at the end of the cohort; the time was fixed, so scope had to move</td>
+</tr>
+<tr>
+<td>Team</td>
+<td>Team 6 (two people); FinStack mentors helped on platform questions</td>
+</tr>
+<tr>
+<td>Definition of done</td>
+<td>The journey runs end to end for the approved path; other people in the room can complete it; edge cases found in testing are fixed or written down</td>
+</tr>
+</tbody>
+</table></div>
+<h2>2. Epics</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Epic (outcome)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>E1</td>
+<td>Consent and identity: the customer agrees, and we know who they are</td>
+</tr>
+<tr>
+<td>E2</td>
+<td>Price and loan: the loan amount is worked out for the chosen car without hand calculation</td>
+</tr>
+<tr>
+<td>E3</td>
+<td>Lender fit and routing: the executive sees which lenders are open and can reroute after a rejection</td>
+</tr>
+<tr>
+<td>E4</td>
+<td>Settlement: the exact cash needed, trade advance balance and commission are visible</td>
+</tr>
+<tr>
+<td>E5</td>
+<td>Resilience: a missing answer from an outside service never stops the journey (added after the live demo)</td>
+</tr>
+</tbody>
+</table></div>
+<h2>3. User stories and Given/When/Then</h2>
+<p>Format from class: <em>As a ___, I want ___, so that ___.</em> Priority P1 must work, P2 needed for launch, P3 later.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Epic</th>
+<th>Story</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>E1</td>
+<td>As a customer, I want to confirm my consent with a code on my own phone, so that nothing is checked without my agreement</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>E1</td>
+<td>As a customer, I want to verify through DigiLocker, so that I do not hand over document copies</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S3</td>
+<td>E1</td>
+<td>As an executive, I want PAN, name and date of birth pre-filled, so that I do not type them again</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>E2</td>
+<td>As an executive, I want price, road tax, insurance, TCS, on-road price and loan to fill themselves for the chosen Kia, so that the figure is right and fast</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>E3</td>
+<td>As an executive, I want to see which lenders are likely, possible or not a fit, so that I pick one that will accept</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>E3</td>
+<td>As an executive, I want a rejected case to return to the lender choice, so that the sale is not lost</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>E4</td>
+<td>As an executive, I want to see the extra down payment when the approved amount is lower, so that I can tell the customer the exact cash</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S8</td>
+<td>E4</td>
+<td>As a dealer, I want the trade advance balance and commission shown for the case, so that I see my own money</td>
+<td>P2</td>
+</tr>
+<tr>
+<td>S9</td>
+<td>E5</td>
+<td>As an executive, I want a customer with no credit score to show &quot;NTC&quot; and carry on, so that the journey does not stall</td>
+<td>P1</td>
+</tr>
+<tr>
+<td>S10</td>
+<td>E5</td>
+<td>As an executive, I want the vehicle-number check skipped when there is no exchange car, so that the journey does not stop</td>
+<td>P1</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Given / When / Then records</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Story</th>
+<th>Given</th>
+<th>When</th>
+<th>Then</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>The customer's mobile is entered and the terms box is ticked</td>
+<td>The code is sent and the customer types it</td>
+<td>A correct code continues to DigiLocker; a wrong code blocks and allows resend</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>A Kia model is chosen and the down payment and exchange answer are in</td>
+<td>Step 3 opens</td>
+<td>All seven fields are filled; loan = on-road − TCS − down payment − exchange value</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Score, credit health, loan and monthly commitment are known</td>
+<td>Step 4 opens</td>
+<td>Each of the four lenders gets likely, possible or not a fit, and one can be chosen</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>A case was sent to a lender</td>
+<td>The status is set to rejected</td>
+<td>The case returns to Step 4 to choose another lender</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>The lender approved less than the loan requirement</td>
+<td>Step 6 opens</td>
+<td>Additional down payment = loan requirement − approved amount</td>
+</tr>
+<tr>
+<td>S9</td>
+<td>The bureau returns no score</td>
+<td>Step 4 opens</td>
+<td>The screen shows NTC and only lenders that accept NTC are offered</td>
+</tr>
+<tr>
+<td>S10</td>
+<td>Exchange is answered No</td>
+<td>Step 2 is submitted</td>
+<td>No vehicle number is asked and the journey moves on</td>
+</tr>
+</tbody>
+</table></div>
+<h2>4. Scenario and edge-case matrix</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Story</th>
+<th>Environment</th>
+<th>Starting state</th>
+<th>Event</th>
+<th>Expected result</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S1</td>
+<td>Customer's phone</td>
+<td>Terms ticked</td>
+<td>Wrong code typed</td>
+<td>Blocked, resend allowed</td>
+<td>Seen in the screen recording</td>
+</tr>
+<tr>
+<td>S2</td>
+<td>DigiLocker</td>
+<td>Customer verified</td>
+<td>Return to the journey</td>
+<td>Step 2 opens with PAN filled</td>
+<td>Seen in the screen recording</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Page refresh</td>
+<td>Step 3 filled</td>
+<td>Browser refreshed</td>
+<td>TCS and loan stay right</td>
+<td>A bug was found (TCS dropped to 0 because the value came back as text) and fixed</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Price table</td>
+<td>Kia model not in the table</td>
+<td>Step 3 opens</td>
+<td>Price shows −1; executive types the price</td>
+<td>Not built</td>
+</tr>
+<tr>
+<td>S5</td>
+<td>Bureau</td>
+<td>Score 650, health Good</td>
+<td>Step 4 opens</td>
+<td>sbi and hdfc not a fit; bajaj and chola possible</td>
+<td>Worked through on paper from the rules</td>
+</tr>
+<tr>
+<td>S6</td>
+<td>Routing-2</td>
+<td>Status chosen &quot;rejected&quot;</td>
+<td>Submit</td>
+<td>Return to Step 4</td>
+<td>Found a defect: error &quot;Missing key approved_finance_amount&quot;</td>
+</tr>
+<tr>
+<td>S7</td>
+<td>Routing-2</td>
+<td>Approved 15,00,000 of 15,17,728</td>
+<td>Step 6 opens</td>
+<td>Additional down payment 17,728</td>
+<td>Seen in the screen recording</td>
+</tr>
+<tr>
+<td>S9</td>
+<td>Bureau</td>
+<td>No score returned</td>
+<td>Step 4</td>
+<td>NTC and NTC-accepting lenders</td>
+<td>Found at the live demo; fixed after</td>
+</tr>
+<tr>
+<td>S10</td>
+<td>Verification</td>
+<td>Exchange No</td>
+<td>Submit</td>
+<td>Vehicle number skipped</td>
+<td>Found at the live demo; fixed after</td>
+</tr>
+<tr>
+<td>S4</td>
+<td>Loan formula</td>
+<td>Exchange value filled after the loan was worked out</td>
+<td>Step 3</td>
+<td>Loan recomputes</td>
+<td>Defect: loan ignored the exchange value</td>
+</tr>
+<tr>
+<td>Any</td>
+<td>Outside API</td>
+<td>Returns nothing</td>
+<td>Any step</td>
+<td>Plain label, move on</td>
+<td>Principle; each call still to be tested</td>
+</tr>
+</tbody>
+</table></div>
+<h2>5. Tasks, team and output</h2>
+<p>Teams are shown by function. Estimates were not recorded. &quot;Done on&quot; comes from file dates and the chat.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Task</th>
+<th>Team (function)</th>
+<th>Output</th>
+<th>Estimate</th>
+<th>Done on</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lock the product idea and problem</td>
+<td>Product</td>
+<td>Idea and problem statement</td>
+<td>not recorded</td>
+<td>9 to 10 Oct</td>
+</tr>
+<tr>
+<td>Flowchart and low-fidelity screens, emailed to FinStack</td>
+<td>Product and design</td>
+<td>Flowchart and wireframe</td>
+<td>not recorded</td>
+<td>10 to 11 Oct (the first email was flagged for the format; a revised wireframe followed on 11 Oct)</td>
+</tr>
+<tr>
+<td>PRD decisions F1 to F26</td>
+<td>Product</td>
+<td>Decisions log</td>
+<td>not recorded</td>
+<td>10 to 11 Oct</td>
+</tr>
+<tr>
+<td>Revised wireframe and the F15 to F26 changes</td>
+<td>Design</td>
+<td>Wireframe v2</td>
+<td>not recorded</td>
+<td>11 Oct</td>
+</tr>
+<tr>
+<td>Lender panel and personas workbook</td>
+<td>Product and data</td>
+<td>Workbook with ten lenders, rules and personas</td>
+<td>not recorded</td>
+<td>12 Oct</td>
+</tr>
+<tr>
+<td>Kia price table (182 variants) and road tax lookup</td>
+<td>Data and build</td>
+<td>Dictionary expressions and JSON</td>
+<td>not recorded</td>
+<td>12 to 13 Oct</td>
+</tr>
+<tr>
+<td>Journey screens 1 to 6 in FinStack</td>
+<td>Build</td>
+<td>Working six-step journey</td>
+<td>not recorded</td>
+<td>12 to 13 Oct</td>
+</tr>
+<tr>
+<td>Formulas: insurance, TCS, on-road, loan, LTV, credit health</td>
+<td>Build</td>
+<td>Logic variables</td>
+<td>not recorded</td>
+<td>13 Oct</td>
+</tr>
+<tr>
+<td>Lender fit formula (four inputs, six outputs)</td>
+<td>Build</td>
+<td>One formula, tested in Python</td>
+<td>not recorded</td>
+<td>13 Oct</td>
+</tr>
+<tr>
+<td>Trade advance, used, finance amount and commission</td>
+<td>Build</td>
+<td>Logic variables</td>
+<td>not recorded</td>
+<td>13 Oct</td>
+</tr>
+<tr>
+<td>Test passes and fixes (refresh bug, dictionary bracketing)</td>
+<td>Build and test</td>
+<td>Fixes</td>
+<td>not recorded</td>
+<td>13 Oct</td>
+</tr>
+<tr>
+<td>Pitch page and 5-minute problem statement</td>
+<td>Product</td>
+<td>Pitch page</td>
+<td>not recorded</td>
+<td>13 Oct</td>
+</tr>
+<tr>
+<td>Live demo</td>
+<td>Team</td>
+<td>Demo with about 15 to 16 people using the journey</td>
+<td>not recorded</td>
+<td>13 Oct evening</td>
+</tr>
+<tr>
+<td>NTC path and vehicle-number skip</td>
+<td>Build</td>
+<td>Two changes</td>
+<td>not recorded</td>
+<td>after the demo</td>
+</tr>
+<tr>
+<td>Production launch plan</td>
+<td>Product</td>
+<td>Plan (pdf)</td>
+<td>not recorded</td>
+<td>written 16 Oct, sent late</td>
+</tr>
+</tbody>
+</table></div>
+<h2>6. Sequencing and gates</h2>
+<p>Discovery &gt; design &gt; build &gt; test &gt; demo &gt; fixes &gt; launch plan.</p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Gate</th>
+<th>Passed?</th>
+<th>Evidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Idea locked</td>
+<td>Yes</td>
+<td>Team list and problem statement</td>
+</tr>
+<tr>
+<td>Flowchart submitted in the right format</td>
+<td>Partly</td>
+<td>First email was flagged by FinStack for the format (no team number in the subject); a revised wireframe was sent on 11 Oct and no reply is in the chat</td>
+</tr>
+<tr>
+<td>Wireframe signed off</td>
+<td>Not confirmed</td>
+<td>Revised wireframe sent 11 Oct, no sign-off seen</td>
+</tr>
+<tr>
+<td>Journey runs end to end on the approved path</td>
+<td>Yes</td>
+<td>Screen recording</td>
+</tr>
+<tr>
+<td>Rejected path works</td>
+<td><strong>No</strong></td>
+<td>Error on &quot;rejected&quot;</td>
+</tr>
+<tr>
+<td>Zero wrong-money defects</td>
+<td><strong>No</strong></td>
+<td>Loan ignored the exchange value</td>
+</tr>
+<tr>
+<td>Demo done</td>
+<td>Yes</td>
+<td>Live demo, other people completed the journey</td>
+</tr>
+<tr>
+<td>Production launch plan sent on time</td>
+<td><strong>No</strong></td>
+<td>Sent after the deadline</td>
+</tr>
+</tbody>
+</table></div>
+<h2>7. Scope, time and cost trade-off</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Axis</th>
+<th>What was fixed</th>
+<th>What gave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Time</td>
+<td>The demo slot</td>
+<td>Everything else</td>
+</tr>
+<tr>
+<td>Scope</td>
+<td>Started wide (lender portal, commission ledger, dashboard, review queue, CSV upload)</td>
+<td>Cut to one linear journey with settlement figures, because FinStack's builder had no login, no database and no menu setup for us</td>
+</tr>
+<tr>
+<td>Cost</td>
+<td>No spend beyond time</td>
+<td>Real lender data, API connections and the asset value were replaced by tables, rules and test values</td>
+</tr>
+</tbody>
+</table></div>
+<p>After the demo, two small changes cut paid or wasted calls: the vehicle-number lookup is skipped when there is no exchange car, and the credit report request stops once NTC is known.</p>
+<h2>8. Roadmap</h2>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Goal</th>
+<th>Gate to leave</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sprint 2: fix</td>
+<td>Fix the loan formula and the rejected path; show credit health and readable car names; remove the rejected lender from the list; test every outside call with an empty answer</td>
+<td>All P1 stories pass on every path</td>
+</tr>
+<tr>
+<td>Sprint 3: connect</td>
+<td>Real PAN autofill, asset value, lender send and status; lender list for NTC; a date variable</td>
+<td>One real case end to end</td>
+</tr>
+<tr>
+<td>Sprint 4: pilot</td>
+<td>One or two Kia outlets; baseline completion and decision time</td>
+<td>Pilot report</td>
+</tr>
+<tr>
+<td>Later</td>
+<td>Bank statement analysis, review queue, dealer login and dashboard, more brands, used cars</td>
+<td>Decided after the pilot</td>
+</tr>
+</tbody>
+</table></div>
+<h2>9. Retrospective</h2>
+<p><strong>What went well:</strong> the journey ran end to end; most fields pre-fill; other people could complete it at the demo; the checks (name, PAN, age) were written as expressions even where no screen shows them.</p>
+<p><strong>What went wrong:</strong></p>
+<ul>
+<li>The first flowchart email broke the submission format, and the launch plan went in late.</li>
+<li>We found the loan defect and the rejected-path error late.</li>
+<li>Edge cases (NTC, no exchange car) were found by other people at the demo, not by our own testing.</li>
+</ul>
+<p><strong>What we do differently:</strong> write the edge-case matrix before building, run every outside call with an empty answer, check the money fields by hand on each path, and read the submission rules before the last day.</p>
+<h2>10. What stays unknown</h2>
+<p>Individual task estimates, the number of test cases run, and the outcome of the judging. They are not in any file, so this plan leaves them blank.</p>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>

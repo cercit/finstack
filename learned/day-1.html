@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Day 1: how banks work, and what a no-code lending platform does | Sameer Mittimani</title><meta name="description" content="How banks, RBI and NBFCs work, and what a no-code lending platform is.">
+<meta name="author" content="Sameer Shreenivas Mittimani"><meta name="theme-color" content="#0a0a0f">
+<meta property="og:title" content="Day 1: how banks work, and what a no-code lending platform does | Sameer Mittimani"><meta property="og:description" content="How banks, RBI and NBFCs work, and what a no-code lending platform is."><meta property="og:type" content="website">
+<script>try{var t=localStorage.getItem('sameer-portfolio-theme');document.documentElement.dataset.theme=(t==='light'||t==='dark')?t:(matchMedia('(prefers-color-scheme: light)').matches?'light':'dark')}catch(e){}</script>
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg"><link rel="stylesheet" href="../assets/fonts.css"><link rel="stylesheet" href="../assets/style.css"><link rel="stylesheet" href="../assets/site_extra.css"><script defer src="../assets/app.js"></script></head>
+<body><a class="skip-link" href="#main">Skip to content</a>
+<header class="site-header wrap"><a class="brand" href="https://cercit.github.io/me/index.html" aria-label="Sameer Mittimani, home"><span class="monogram" aria-hidden="true"><span>S</span>ameer</span></a><nav class="desktop-nav" aria-label="Main navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a class="resume-link" href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><div class="header-tools"><button class="icon-button theme-button" data-theme-toggle aria-label="Switch theme"><svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M20.5 14A8.5 8.5 0 0 1 10 3.5 8.5 8.5 0 1 0 20.5 14Z"/></svg><svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg></button><button id="menuToggle" class="menu-toggle" aria-controls="menuDialog" aria-expanded="false">Menu <span aria-hidden="true">☰</span></button></div></header>
+<dialog id="menuDialog" aria-label="Navigation"><div class="dialog-top"><span class="eyebrow">Navigation</span><button id="menuClose" class="icon-button" aria-label="Close menu">×</button></div><nav aria-label="Mobile navigation"><a href="../index.html">Overview</a><a href="../selection/index.html">Selection</a><a href="index.html" aria-current=page>Learned</a><a href="../built/index.html">Built</a><a href="../tested/index.html">Tested</a><a href="../launch/index.html">Launch</a><a href="../about/index.html">About</a><a href="https://cercit.github.io/me/work.html">My work <span aria-hidden="true">↗</span></a></nav><p>Chennai, India</p></dialog>
+<main id="main"><section class="case-hero wrap"><a class="back-link" href="index.html"><span aria-hidden="true">←</span> Learned</a><div class="project-meta"><span>cohort / notes</span></div><h1>Day 1: how banks work, and what a no-code lending platform does</h1><p class="case-deck">How banks, RBI and NBFCs work, and what a no-code lending platform is.</p></section><div class="wrap doc-wrap"><article class="doc">
+<p>Friday 9 Oct 2026, 4 to 8 pm. Two parts: a session on banks, RBI and NBFCs, then a demo of FinStack's platform and the hackathon brief.</p>
+<p>Written in my own words from my notes of the recording. Items marked <strong>[verify]</strong> were said in class in a simplified way and need checking before I repeat them.</p>
+<hr />
+<h2>Part 1: how banks, RBI and NBFCs work</h2>
+<p><strong>The big idea.</strong> A bank trades money: it buys money (deposits, capital) and sells it (loans) at a higher rate. RBI sets rules so a bank never runs out of cash.</p>
+<p><strong>Assets and liabilities flip for a bank.</strong> My loan is my debt, but it is the bank's asset because it earns interest. My fixed deposit is my asset and the bank's liability, because it pays interest and I may withdraw it.</p>
+<p><strong>Three safety buffers</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Buffer</th>
+<th>What it is</th>
+<th>Earns the bank</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CRR</td>
+<td>Cash kept with RBI, cash only</td>
+<td>Nothing</td>
+</tr>
+<tr>
+<td>SLR</td>
+<td>Government bonds, gold and other very safe assets</td>
+<td>Stable, low</td>
+</tr>
+<tr>
+<td>HQLA</td>
+<td>Liquid assets to cover the next 30 days of expected outflow</td>
+<td>Some</td>
+</tr>
+</tbody>
+</table></div>
+<p>About a quarter to 30% of deposits sit in these buffers; the rest can be lent. The reason is to stop a <strong>bank run</strong>, where panic makes everyone withdraw at once even if the bank is fine (Silicon Valley Bank and Yes Bank were the examples).</p>
+<p><strong>Every loan creates a deposit.</strong> When a bank lends, the money lands in an account at the same bank. Nothing physically moves; one balance becomes two entries. That is why banks build ecosystems (apps, salary accounts, no-cost EMIs): to keep the money inside.</p>
+<p><strong>LAF, repo and reverse repo.</strong> Under the liquidity adjustment facility a bank swaps cash and bonds with RBI. The repo rate is what a bank pays to borrow cash from RBI; the reverse repo rate is what RBI pays a bank that parks cash. Lower repo means easier lending; higher repo cools inflation.</p>
+<p><strong>NBFCs.</strong> They lend but, in the deposit-taking case, follow similar ratios and pay a little more on deposits with less insurance cover. A cheaper source of money lets one NBFC serve good borrowers; a dearer one must lend to riskier segments at higher rates. When two lenders chase the same segment they compete on <strong>how easy the onboarding journey is</strong>.</p>
+<p><strong>What I took away:</strong> the lender's cost of money decides which customers it can serve, and when costs are equal the journey itself is the product.</p>
+<h2>Part 2: what a no-code lending platform is</h2>
+<p><strong>What FinStack is.</strong> Software sold to lenders (banks and NBFCs). It does not lend and does not tell the lender what rules to set. The lender's own customer is the borrower; FinStack's customer is the lender.</p>
+<p><strong>Origination vs servicing.</strong> Origination (sourcing, KYC, underwriting, decision) is where lenders can differ. Servicing (EMIs, reporting, collections) is heavily regulated, so there is little room to differ. The hackathon is about origination.</p>
+<p><strong>Why lenders buy instead of build</strong></p>
+<ol>
+<li>Integrations: Aadhaar, PAN, bank statements and bureaus need Indian vendors, and generic no-code tools do not have them.</li>
+<li>Compliance: an audit trail of every action, masked data, consent records.</li>
+<li>Speed: a risk team can change a rule in seconds, not months.</li>
+<li>Data stays with the lender, deployed in the lender's own cloud account.</li>
+</ol>
+<p><strong>The building blocks</strong></p>
+<div class="tw"><table>
+<thead>
+<tr>
+<th>Block</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>API hub</td>
+<td>Ready verification APIs, each an input and an output; several vendors per check, with fallback</td>
+</tr>
+<tr>
+<td>Form builder</td>
+<td>Forms are the building block of a journey: API forms (PAN, bureau) and custom forms</td>
+</tr>
+<tr>
+<td>Journey builder</td>
+<td>Orders the forms into steps; sets what happens on pass or fail</td>
+</tr>
+<tr>
+<td>Rules</td>
+<td>Verification rules (for example a fuzzy name match at 80%), visibility rules, logic variables</td>
+</tr>
+<tr>
+<td>Internal workflow</td>
+<td>Back-office screens for review and approval</td>
+</tr>
+<tr>
+<td>Audit trail</td>
+<td>Every entry, API response and decision logged</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Underwriting in one line.</strong> Decide whether to lend, how much and at what rate. Knock-out rules (for example a score under 650 or a name mismatch) reject at once.</p>
+<p><strong>Bureau and Account Aggregator.</strong> The platform cannot make hard credit pulls or Account Aggregator calls on its own; the licensed lender supplies the credentials. PAN and Aadhaar checks work without that.</p>
+<p><strong>Privacy law (DPDP Act).</strong> Take consent and say why the data is collected, encrypt and mask personal data, delete it when the consent period ends.</p>
+<h2>The hackathon brief</h2>
+<ul>
+<li>Build any fintech product on the form and journey builders.</li>
+<li>KYC is mandatory; put a consent tick in the first form; onboard an individual, not a business; use soft-pull bureau calls only.</li>
+<li>A complete simple product beats a half-built big one.</li>
+<li>Teams of two, one technical and one not.</li>
+</ul>
+<h2>What I took away</h2>
+<ol>
+<li>Banks and NBFCs differ by cost of money and by chosen customer segment. The segment decides the rules.</li>
+<li>In a lending product the <strong>order of checks</strong> is a design choice. Cheap checks go first, costly ones later.</li>
+<li>A platform like this turns &quot;build an app&quot; into &quot;configure forms, order them and add rules&quot;. The thinking moves to the customer, the rules and the data.</li>
+</ol>
+<h2>Where I used it in DealerFinance</h2>
+<ul>
+<li>Consent tick first, then the checks (Step 1).</li>
+<li>Lender fit rules per lender, as simple thresholds (the knock-out idea).</li>
+<li>A journey of forms in an order, with a rejection sending the case back (journey builder).</li>
+</ul>
+<h2>Open or to verify</h2>
+<ul>
+<li>Deposit insurance cover as said in class does not match what I know. The current cover is ₹5 lakh per depositor per bank <strong>[verify]</strong>.</li>
+<li>The CRR range said in class was 3 to 5% <strong>[verify the current level]</strong>.</li>
+</ul>
+</article></div></main>
+<footer id="contact" class="contact-footer"><div class="wrap"><div class="contact-top"><div><span class="eyebrow">Get in touch</span><h2>Let's talk product.</h2><p>I'm working toward a product role and would like to hear from people building in finance, auto or data. Happy to walk through a project or compare notes.</p></div><a class="contact-orbit" href="mailto:samsm@outlook.in" aria-label="Email Sameer">↗</a></div><div class="contact-bottom"><div class="email-group"><a class="button email-button" href="mailto:samsm@outlook.in">Email me <span aria-hidden="true">↗</span></a><span class="email-plain">samsm@outlook.in</span></div><nav aria-label="Social links"><a href="https://www.linkedin.com/in/sameersm">LinkedIn <span aria-hidden="true">↗</span></a><a href="https://github.com/cercit">GitHub <span aria-hidden="true">↗</span></a><a href="https://www.kaggle.com/cercit">Kaggle <span aria-hidden="true">↗</span></a><a href="https://cercit.github.io/me/assets/resume.pdf">Resume (PDF) <span aria-hidden="true">↗</span></a></nav></div><div class="footer-fine"><span>Sameer Shreenivas Mittimani</span><a href="https://cercit.github.io/me/about.html">More about me</a><span>Lender terms and car prices on this site are invented or demo values · 2026</span></div></div></footer></body></html>
